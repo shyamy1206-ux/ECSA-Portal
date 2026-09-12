@@ -23,7 +23,7 @@ export default async function OpportunitiesPage() {
 
       <div className="space-y-4">
         {opportunities && opportunities.length > 0 ? (
-          opportunities.map((opp) => (
+          opportunities.map((opp: any) => (
             <a key={opp.id} href={opp.link} target="_blank" rel="noopener noreferrer" className="block group">
               <div className="glass p-6 rounded-2xl border border-white/10 hover:border-electric-blue/50 transition-all flex flex-col md:flex-row justify-between md:items-center gap-4">
                 <div>

@@ -61,7 +61,7 @@ export default function ProjectExhibition({ projects }: { projects: any[] }) {
   const [activeProject, setActiveProject] = useState<any | null>(null);
 
   // Map real projects to 3D positions if they don't have them
-  const mappedProjects = projects.map((proj, idx) => {
+  const mappedProjects = projects.map((proj: any, idx: number) => {
     // Simple logic to space them out in a circle/grid
     const x = (idx % 3 - 1) * 3;
     const z = Math.floor(idx / 3) * -3;
@@ -88,7 +88,7 @@ export default function ProjectExhibition({ projects }: { projects: any[] }) {
           polar={[-Math.PI / 3, Math.PI / 3]} 
           azimuth={[-Math.PI / 2, Math.PI / 2]}
         >
-          {mappedProjects.map((proj) => (
+          {mappedProjects.map((proj: any) => (
             <ProjectCard 
               key={proj.id} 
               project={proj} 

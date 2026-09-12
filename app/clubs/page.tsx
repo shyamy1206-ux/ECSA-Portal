@@ -26,7 +26,7 @@ export default async function ClubsDirectory() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {clubs && clubs.length > 0 ? (
-          clubs.map((club) => (
+          clubs.map((club: any) => (
             <Link href={`/clubs/${club.slug}`} key={club.id} className="group block">
               <div className="glass p-6 rounded-3xl border border-white/10 hover:border-electric-blue/50 transition-all hover:-translate-y-1 h-full flex flex-col">
                 <div className="w-16 h-16 rounded-2xl bg-black/40 border border-white/10 mb-6 flex items-center justify-center text-xl font-heading font-bold text-gray-500 group-hover:text-electric-cyan transition-colors overflow-hidden">

@@ -52,7 +52,7 @@ export default async function ClubApplicationPage({ params }: { params: { slug: 
           <div className="space-y-4">
             <h3 className="text-lg font-bold text-white border-b border-white/10 pb-2">Select a Role</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {drives.flatMap(drive => drive.recruitment_roles).map((role: any) => (
+              {drives.flatMap((drive: any) => drive.recruitment_roles).map((role: any) => (
                 <label key={role.id} className="flex items-start gap-3 p-4 rounded-xl border border-white/10 bg-black/40 cursor-pointer hover:border-electric-blue/50 transition-colors has-[:checked]:border-electric-blue has-[:checked]:bg-electric-blue/5">
                   <input type="radio" name="role" value={role.id} className="mt-1 accent-electric-blue" required />
                   <div>

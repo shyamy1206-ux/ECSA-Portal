@@ -50,7 +50,7 @@ export default async function ResourceVault() {
             </thead>
             <tbody className="divide-y divide-white/5">
               {resources && resources.length > 0 ? (
-                resources.map((res) => (
+                resources.map((res: any) => (
                 <tr key={res.id} className="hover:bg-white/5 transition-colors group">
                   <td className="px-4 py-4 flex items-center gap-3">
                     {res.type === 'folder' ? (

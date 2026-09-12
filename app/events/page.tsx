@@ -28,7 +28,7 @@ export default async function EventsPage() {
 
       <div className="space-y-6">
         {events && events.length > 0 ? (
-          events.map((event) => {
+          events.map((event: any) => {
             const eventDate = new Date(event.date);
             const month = eventDate.toLocaleString('default', { month: 'short' });
             const day = eventDate.getDate();

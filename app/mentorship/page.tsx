@@ -57,7 +57,7 @@ export default async function MentorshipNetwork() {
         <div className="flex-1 glass rounded-2xl border border-white/10 overflow-hidden flex flex-col">
           {mentors && mentors.length > 0 ? (
             <div className="p-6 grid grid-cols-1 lg:grid-cols-2 gap-4 overflow-y-auto h-full custom-scrollbar">
-              {mentors.map((alumnus) => (
+              {mentors.map((alumnus: any) => (
                 <div key={alumnus.id} className="p-5 rounded-xl bg-black/40 border border-white/10 hover:border-electric-blue/30 transition-colors group">
                   <div className="flex justify-between items-start mb-4">
                     <div className="flex items-center gap-3">

@@ -24,7 +24,7 @@ export default async function AdminRecruitment() {
 
       <div className="grid grid-cols-1 gap-4">
         {drives && drives.length > 0 ? (
-          drives.map((drive) => (
+          drives.map((drive: any) => (
             <div key={drive.id} className="glass p-6 rounded-2xl border border-white/5 flex flex-col md:flex-row justify-between md:items-center gap-4">
               <div>
                 <div className="flex items-center gap-3 mb-2">

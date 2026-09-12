@@ -24,7 +24,7 @@ export default async function EventGalleryPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {galleries && galleries.length > 0 ? (
-          galleries.map((gallery) => (
+          galleries.map((gallery: any) => (
             <div key={gallery.id} className="glass p-4 rounded-2xl border border-white/5 flex flex-col group">
                <div className="w-full h-40 bg-black/40 rounded-xl mb-4 border border-white/5 flex items-center justify-center text-gray-600">
                   <ImageIcon size={32} />

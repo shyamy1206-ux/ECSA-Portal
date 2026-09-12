@@ -60,7 +60,7 @@ export default async function ClubDetailPage({ params }: { params: { slug: strin
               <p className="text-gray-400 mb-6">Join {club.name} and help us build the future.</p>
               
               <div className="space-y-4 mb-6">
-                {drives.map(drive => (
+                {drives.map((drive: any) => (
                   <div key={drive.id} className="p-4 bg-black/40 border border-white/10 rounded-xl">
                     <h3 className="font-bold text-white mb-2">{drive.title}</h3>
                     <div className="flex flex-wrap gap-2">
