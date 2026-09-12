@@ -1,18 +1,17 @@
-"use client";
+import { createClient } from "@/lib/supabase/server";
+import { Search, Folder, FileText } from "lucide-react";
+import DownloadButton from "./DownloadButton";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Search, Folder, FileText, Download, Check } from "lucide-react";
+export const revalidate = 60;
 
-// Mock data
-const resources = [
-  { id: 1, name: "OS_Notes_Unit1.pdf", type: "file", category: "Study Material", size: "2.4 MB" },
-  { id: 2, name: "React_Workshop_Slides", type: "folder", category: "Workshop", items: 4 },
-  { id: 3, name: "Previous_Year_Question_Papers", type: "folder", category: "Academics", items: 12 },
-  { id: 4, name: "System_Design_Interview_Prep.pdf", type: "file", category: "Interview Prep", size: "5.1 MB" },
-];
-
-export default function ResourceVault() {
+export default async function ResourceVault() {
+  const supabase = createClient();
+  
+  const { data: resources } = await supabase
+    .from('resources')
+    .select('*')
+    .eq('status', 'published')
+    .order('created_at', { ascending: false });
   return (
     <div className="min-h-screen pt-24 px-8 max-w-7xl mx-auto flex flex-col h-screen">
       <div className="mb-8 shrink-0">
@@ -50,11 +49,11 @@ export default function ResourceVault() {
               </tr>
             </thead>
             <tbody className="divide-y divide-white/5">
-              {resources.map((res) => (
+              {resources && resources.length > 0 ? (
+                resources.map((res) => (
                 <tr key={res.id} className="hover:bg-white/5 transition-colors group">
                   <td className="px-4 py-4 flex items-center gap-3">
                     {res.type === 'folder' ? (
-                      // 3D styled folder icon representation
                       <div className="relative w-8 h-8 flex items-center justify-center drop-shadow-[0_0_8px_rgba(0,240,255,0.3)]">
                          <Folder className="text-electric-blue absolute" fill="currentColor" size={24} />
                          <Folder className="text-white opacity-20 absolute translate-y-0.5" size={24} />
@@ -64,85 +63,29 @@ export default function ResourceVault() {
                         <FileText size={20} />
                       </div>
                     )}
-                    <span className="font-medium text-white text-sm">{res.name}</span>
+                    <span className="font-medium text-white text-sm">{res.title}</span>
                   </td>
                   <td className="px-4 py-4 text-sm text-gray-400">
                     {res.category}
                   </td>
                   <td className="px-4 py-4 text-sm text-gray-500 font-mono">
-                    {res.type === 'folder' ? `${res.items} items` : res.size}
+                    {res.type === 'folder' ? `Folder` : 'File'}
                   </td>
                   <td className="px-4 py-4 text-right">
-                    {res.type === 'file' && <DownloadButton />}
+                    {res.type === 'file' && <DownloadButton url={res.url} />}
                   </td>
                 </tr>
-              ))}
+              ))) : (
+                <tr>
+                  <td colSpan={4} className="px-4 py-12 text-center text-gray-500">
+                    No resources available yet.
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>
       </div>
     </div>
-  );
-}
-
-function DownloadButton() {
-  const [status, setStatus] = useState<'idle' | 'downloading' | 'done'>('idle');
-
-  const handleDownload = () => {
-    if (status !== 'idle') return;
-    setStatus('downloading');
-    
-    // Simulate download
-    setTimeout(() => {
-      setStatus('done');
-      
-      // Reset after a while
-      setTimeout(() => {
-        setStatus('idle');
-      }, 3000);
-    }, 1500);
-  };
-
-  return (
-    <button 
-      onClick={handleDownload}
-      className="relative overflow-hidden w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group hover:border-electric-blue transition-colors focus:outline-none"
-    >
-      <AnimatePresence mode="wait">
-        {status === 'idle' && (
-          <motion.div
-            key="idle"
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            exit={{ scale: 0 }}
-            className="text-gray-400 group-hover:text-electric-blue"
-          >
-            <Download size={16} />
-          </motion.div>
-        )}
-        
-        {status === 'downloading' && (
-          <motion.div
-            key="downloading"
-            className="absolute inset-0 bg-electric-blue/20"
-            initial={{ height: "0%", top: "100%" }}
-            animate={{ height: "100%", top: "0%" }}
-            transition={{ duration: 1.5, ease: "linear" }}
-          />
-        )}
-        
-        {status === 'done' && (
-          <motion.div
-            key="done"
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            exit={{ scale: 0 }}
-            className="text-green-400 drop-shadow-[0_0_5px_rgba(74,222,128,0.5)]"
-          >
-            <Check size={18} strokeWidth={3} />
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </button>
   );
 }

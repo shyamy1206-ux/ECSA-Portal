@@ -3,18 +3,11 @@
 import { useState } from "react";
 import { motion, LayoutGroup } from "framer-motion";
 
-// Dummy data for team formation
+// In a production environment, this would fetch from a 'hackathon_teams' or 'recruitment' table via Supabase
 const initialColumns = {
-  "available": [
-    { id: "s1", name: "Rahul Deshmukh", role: "AI/ML", skills: ["Python", "TensorFlow"] },
-    { id: "s2", name: "Ananya Sharma", role: "Frontend", skills: ["Next.js", "React Three Fiber"] },
-  ],
-  "shortlisted": [
-    { id: "s3", name: "Vikram Singh", role: "Backend", skills: ["Node.js", "Supabase"] },
-  ],
-  "team": [
-    { id: "s4", name: "You (Leader)", role: "Fullstack", skills: ["TypeScript", "Next.js"] },
-  ]
+  "available": [],
+  "shortlisted": [],
+  "team": []
 };
 
 export default function HackathonKanban() {

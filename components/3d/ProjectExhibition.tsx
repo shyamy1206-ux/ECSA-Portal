@@ -6,13 +6,6 @@ import { useState, useRef } from "react";
 import * as THREE from "three";
 import { motion, AnimatePresence } from "framer-motion";
 
-// Dummy project data
-const projects = [
-  { id: 1, title: "Autonomous Drone", tech: "Python, ROS", color: "#00f0ff", position: [-3, 0, 0], description: "AI powered drone for campus mapping." },
-  { id: 2, title: "Smart Notice Board", tech: "Next.js, IoT", color: "#ff00ff", position: [0, 0, 2], description: "Digital notice board synced with ECSA announcements." },
-  { id: 3, title: "Face Auth System", tech: "C++, OpenCV", color: "#8a2be2", position: [3, 0, -1], description: "Secure lab entry using facial recognition." }
-];
-
 function ProjectCard({ project, onClick }: { project: any, onClick: () => void }) {
   const group = useRef<THREE.Group>(null);
   const [hovered, setHover] = useState(false);
@@ -49,7 +42,9 @@ function ProjectCard({ project, onClick }: { project: any, onClick: () => void }
                  style={{ boxShadow: hovered ? `0 0 20px ${project.color}40` : 'none' }}>
               <div>
                 <h3 className="text-xl font-bold font-heading mb-2 leading-tight">{project.title}</h3>
-                <p className="text-xs text-gray-400 font-mono">{project.tech}</p>
+                <p className="text-xs text-gray-400 font-mono">
+                  {project.tech_stack ? project.tech_stack.join(', ') : 'Tech Stack TBA'}
+                </p>
               </div>
               <div className="mt-auto">
                 <span className="text-xs uppercase tracking-wider text-electric-cyan font-bold">View Details</span>
@@ -62,8 +57,21 @@ function ProjectCard({ project, onClick }: { project: any, onClick: () => void }
   );
 }
 
-export default function ProjectExhibition() {
+export default function ProjectExhibition({ projects }: { projects: any[] }) {
   const [activeProject, setActiveProject] = useState<any | null>(null);
+
+  // Map real projects to 3D positions if they don't have them
+  const mappedProjects = projects.map((proj, idx) => {
+    // Simple logic to space them out in a circle/grid
+    const x = (idx % 3 - 1) * 3;
+    const z = Math.floor(idx / 3) * -3;
+    const colors = ["#00f0ff", "#ff00ff", "#8a2be2", "#4ade80", "#facc15"];
+    return {
+      ...proj,
+      position: [x, 0, z],
+      color: colors[idx % colors.length]
+    };
+  });
 
   return (
     <div className="w-full h-[80vh] relative">
@@ -80,7 +88,7 @@ export default function ProjectExhibition() {
           polar={[-Math.PI / 3, Math.PI / 3]} 
           azimuth={[-Math.PI / 2, Math.PI / 2]}
         >
-          {projects.map((proj) => (
+          {mappedProjects.map((proj) => (
             <ProjectCard 
               key={proj.id} 
               project={proj} 
