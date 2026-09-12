@@ -6,7 +6,7 @@ const BOD_MEMBERS = [
   { role: "Secretary", name: "Ojas Sulakhe" },
   { role: "Joint Secretary", name: "Vrushabh Yeole", highlight: true },
   { role: "Treasurer", name: "Aman Wagh" },
-  { role: "PR & Outreach Head", name: "Tanay Borase" },
+  { role: "PR & Outreach Head", name: "Tanaya Patil" },
   { role: "Technical Head", name: "Shrujal Inde" },
   { role: "Event Management Head", name: "Vaibhav" },
   { role: "Social Media & Publicity Head", name: "Pranav Borkar" },
