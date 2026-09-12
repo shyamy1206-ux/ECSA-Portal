@@ -1,5 +1,4 @@
-import Image from "next/image";
-import { Mail, Phone, BookOpen, Award } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
 
 export default function HoDPage() {
   return (

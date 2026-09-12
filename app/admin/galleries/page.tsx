@@ -1,6 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
-import { Calendar, MapPin, Users, Image as ImageIcon } from "lucide-react";
-import MagneticButton from "@/components/ui/MagneticButton";
+import { Image as ImageIcon } from "lucide-react";
+
 
 export default async function EventGalleryPage() {
   const supabase = createClient();

@@ -1,4 +1,4 @@
-import { Search, MapPin, Calendar, HelpCircle } from "lucide-react";
+import { HelpCircle } from "lucide-react";
 import MagneticButton from "@/components/ui/MagneticButton";
 import Link from "next/link";
 

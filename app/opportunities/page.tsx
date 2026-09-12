@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
-import { Briefcase, MapPin, Globe, Clock, ChevronRight } from "lucide-react";
+import { Briefcase, Clock, ChevronRight } from "lucide-react";
 
 export const revalidate = 60;
 
@@ -30,7 +30,7 @@ export default async function OpportunitiesPage() {
                   <div className="flex items-center gap-3 mb-2">
                     <h3 className="font-bold text-xl text-white group-hover:text-electric-blue transition-colors">{opp.title}</h3>
                     <span className="px-2 py-0.5 text-xs rounded bg-white/10 text-gray-300 uppercase tracking-wider font-medium">
-                      {opp.type.replace('_', ' ')}
+                      {(opp.type || 'Opportunity').replace('_', ' ')}
                     </span>
                   </div>
                   <div className="flex items-center gap-4 text-sm text-gray-400">

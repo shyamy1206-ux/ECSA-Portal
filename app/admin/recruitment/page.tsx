@@ -1,6 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { Plus, Users, UserCheck, XCircle } from "lucide-react";
-import Link from "next/link";
+
 
 export default async function AdminRecruitment() {
   const supabase = createClient();

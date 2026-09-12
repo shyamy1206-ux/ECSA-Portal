@@ -1,4 +1,4 @@
-import { Mail, MapPin, Phone, MessageSquare } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
 import MagneticButton from "@/components/ui/MagneticButton";
 
 export default function ContactPage() {

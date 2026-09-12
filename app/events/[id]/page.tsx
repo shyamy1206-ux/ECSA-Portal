@@ -1,6 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
-import { Calendar, MapPin, Users, Clock, Image as ImageIcon } from "lucide-react";
+import { Calendar, MapPin, Users, Image as ImageIcon } from "lucide-react";
 import MagneticButton from "@/components/ui/MagneticButton";
 import Link from "next/link";
 

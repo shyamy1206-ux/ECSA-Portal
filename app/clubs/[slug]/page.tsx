@@ -1,6 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
-import { Users, Code, Cpu, Link as LinkIcon, ChevronRight } from "lucide-react";
+import { Code, Link as LinkIcon, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import MagneticButton from "@/components/ui/MagneticButton";
 
