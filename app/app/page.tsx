@@ -64,7 +64,7 @@ export default async function StudentDashboard() {
       {/* Pending Applications or Registrations */}
       <h3 className="text-xl font-heading font-bold text-white mb-4">Recent Activity</h3>
       <div className="glass p-8 rounded-3xl border border-white/5 text-center text-gray-500">
-        You don't have any recent activity. Register for an event or apply to a club to see updates here!
+        You don&apos;t have any recent activity. Register for an event or apply to a club to see updates here!
       </div>
     </div>
   );

@@ -64,7 +64,7 @@ export default function CertificateVerification() {
           <XCircle className="text-red-500 shrink-0 mt-1" size={24} />
           <div>
             <h3 className="text-red-400 font-bold mb-1">Certificate Not Found</h3>
-            <p className="text-sm text-gray-400">We couldn't find a certificate matching that ID in our secure database. Please check the ID and try again.</p>
+            <p className="text-sm text-gray-400">We couldn&apos;t find a certificate matching that ID in our secure database. Please check the ID and try again.</p>
           </div>
         </div>
       )}

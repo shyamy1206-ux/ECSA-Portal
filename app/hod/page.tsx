@@ -41,10 +41,10 @@ export default function HoDPage() {
               Our department is dedicated to providing a dynamic and rigorous academic environment that bridges the gap between hardware and software. Through the Electronics & Computer Students Association (ECSA), we empower our students to transform theoretical knowledge into practical, industry-ready skills.
             </p>
             <p>
-              ECSA serves as the beating heart of our department's extracurricular activities. It is a platform for innovation, leadership, and technical excellence. We encourage all students to actively participate in ECSA's workshops, hackathons, and mentorship programs.
+              ECSA serves as the beating heart of our department&apos;s extracurricular activities. It is a platform for innovation, leadership, and technical excellence. We encourage all students to actively participate in ECSA&apos;s workshops, hackathons, and mentorship programs.
             </p>
             <p className="font-medium text-white italic">
-              "Create. Connect. Build. We don't just study technology; we shape the future of it."
+              &quot;Create. Connect. Build. We don&apos;t just study technology; we shape the future of it.&quot;
             </p>
           </div>
         </div>
