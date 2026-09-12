@@ -57,7 +57,7 @@ export default function HackathonKanban() {
             count={columns.available.length}
             items={columns.available}
             colId="available"
-            onMove={(id) => moveStudent(id, "available", "shortlisted")}
+            onMove={(id: string) => moveStudent(id, "available", "shortlisted")}
             actionText="Shortlist"
           />
           
@@ -67,9 +67,9 @@ export default function HackathonKanban() {
             count={columns.shortlisted.length}
             items={columns.shortlisted}
             colId="shortlisted"
-            onMove={(id) => moveStudent(id, "shortlisted", "team")}
+            onMove={(id: string) => moveStudent(id, "shortlisted", "team")}
             actionText="Accept"
-            onReject={(id) => moveStudent(id, "shortlisted", "available")}
+            onReject={(id: string) => moveStudent(id, "shortlisted", "available")}
           />
           
           {/* Column 3: Active Roster */}
@@ -78,7 +78,7 @@ export default function HackathonKanban() {
             count={columns.team.length}
             items={columns.team}
             colId="team"
-            onReject={(id) => moveStudent(id, "team", "available")}
+            onReject={(id: string) => moveStudent(id, "team", "available")}
             actionText=""
           />
         </div>
