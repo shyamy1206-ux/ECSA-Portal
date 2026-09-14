@@ -77,7 +77,7 @@ export default async function BoardOfDirectorsPage() {
           return (
             <article
               key={member.id || member.post}
-              className={`flex w-full flex-col sm:flex-row items-stretch justify-between rounded-2xl border transition-transform hover:-translate-y-1 overflow-hidden ${
+              className={`flex w-full min-h-[300px] flex-col sm:flex-row items-stretch justify-between rounded-2xl border transition-transform hover:-translate-y-1 overflow-hidden ${
                 isHighlight 
                   ? 'border-electric-blue/50 bg-electric-blue/10' 
                   : 'border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/10'
@@ -110,7 +110,7 @@ export default async function BoardOfDirectorsPage() {
               </div>
               
               {/* Photo Area */}
-              <div className="w-full sm:w-[35%] h-64 sm:h-auto relative bg-[#0a1020] border-l border-white/10 overflow-hidden group">
+              <div className="w-full sm:w-[40%] h-80 sm:h-auto relative bg-[#0a1020] border-l border-white/10 overflow-hidden group">
                 {photoUrl ? (
                   <Image
                     src={photoUrl}
