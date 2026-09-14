@@ -4,14 +4,25 @@ import { Auth } from '@supabase/auth-ui-react';
 import { ThemeSupa } from '@supabase/auth-ui-shared';
 import { createClient } from '@/lib/supabase/client';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function AuthForm() {
   const supabase = createClient();
   const [origin, setOrigin] = useState('');
+  const router = useRouter();
 
   useEffect(() => {
     setOrigin(window.location.origin);
-  }, []);
+    
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_IN' && session) {
+        router.push('/app');
+        router.refresh();
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, [supabase.auth, router]);
 
   if (!origin) return null; // Avoid hydration mismatch
 
