@@ -2,8 +2,20 @@ import MagneticButton from "@/components/ui/MagneticButton";
 import { createClient } from "@/lib/supabase/server";
 import Image from "next/image";
 
+interface BODMember {
+  id?: string;
+  full_name: string;
+  post: string;
+  session: string;
+  responsibility?: string;
+  photo_path?: string;
+  display_order: number;
+  is_active?: boolean;
+  highlight?: boolean;
+}
+
 // Fallback data in case database fetch fails (e.g., no DB connected)
-const FALLBACK_BOD_MEMBERS = [
+const FALLBACK_BOD_MEMBERS: BODMember[] = [
   { post: "PRESIDENT", full_name: "Priyanshu Prasad", session: "EST 2026-27", responsibility: "Leads the association", display_order: 1 },
   { post: "VICE PRESIDENT", full_name: "Tanushree Jadhav", session: "EST 2026-27", responsibility: "Assists the President", display_order: 2 },
   { post: "SECRETARY", full_name: "Ojas Sulakhe", session: "EST 2026-27", responsibility: "Manages administration", display_order: 3 },
@@ -21,7 +33,7 @@ const FALLBACK_BOD_MEMBERS = [
 export default async function BoardOfDirectorsPage() {
   const supabase = createClient();
   
-  let members = [];
+  let members: BODMember[] = [];
   try {
     const { data, error } = await supabase
       .from('bod_members')
@@ -30,7 +42,7 @@ export default async function BoardOfDirectorsPage() {
       .order('display_order', { ascending: true });
       
     if (!error && data) {
-      members = data;
+      members = data as BODMember[];
     }
   } catch (err) {
     // Graceful fallback if no DB connection
@@ -42,7 +54,7 @@ export default async function BoardOfDirectorsPage() {
   }
 
   // Helper to get public URL for images
-  const getImageUrl = (path?: string) => {
+  const getImageUrl = (path: string | null | undefined) => {
     if (!path) return null;
     const { data } = supabase.storage.from('bod-photos').getPublicUrl(path);
     return data.publicUrl;
@@ -58,7 +70,7 @@ export default async function BoardOfDirectorsPage() {
       </div>
 
       <div className="mx-auto flex w-full max-w-4xl flex-col gap-6 relative z-10 pb-20">
-        {members.map((member: any) => {
+        {members.map((member: BODMember) => {
           const photoUrl = getImageUrl(member.photo_path);
           const isHighlight = member.highlight || member.post?.includes('PRESIDENT') || member.post?.includes('SECRETARY');
 

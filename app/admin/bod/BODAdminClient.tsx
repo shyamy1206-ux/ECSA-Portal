@@ -5,8 +5,16 @@ import { createClient } from "@/lib/supabase/client";
 import Image from "next/image";
 import { useToast } from "@/components/ui/Toast";
 
-export default function BODAdminClient({ initialMembers }: { initialMembers: any[] }) {
-  const [members, setMembers] = useState(initialMembers);
+export interface BODMemberAdmin {
+  id: string;
+  full_name: string;
+  post: string;
+  photo_path: string | null;
+  is_active: boolean;
+}
+
+export default function BODAdminClient({ initialMembers }: { initialMembers: BODMemberAdmin[] }) {
+  const [members, setMembers] = useState<BODMemberAdmin[]>(initialMembers);
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
   const supabase = createClient();
@@ -49,8 +57,8 @@ export default function BODAdminClient({ initialMembers }: { initialMembers: any
 
       setMembers(members.map(m => m.id === memberId ? { ...m, photo_path: filePath } : m));
       toast("Photo updated successfully", "success");
-    } catch (err: any) {
-      toast(`Upload Failed: ${err.message}`, "error");
+    } catch (err: unknown) {
+      toast(`Upload Failed: ${err instanceof Error ? err.message : 'Unknown error'}`, "error");
     } finally {
       setLoading(false);
     }
@@ -65,12 +73,12 @@ export default function BODAdminClient({ initialMembers }: { initialMembers: any
       
       if (error) throw error;
       setMembers(members.map(m => m.id === memberId ? { ...m, is_active: !currentStatus } : m));
-    } catch (err: any) {
+    } catch (err: unknown) {
       toast("Could not update status", "error");
     }
   };
 
-  const getImageUrl = (path?: string) => {
+  const getImageUrl = (path: string | null | undefined) => {
     if (!path) return null;
     const { data } = supabase.storage.from('bod-photos').getPublicUrl(path);
     return data.publicUrl;

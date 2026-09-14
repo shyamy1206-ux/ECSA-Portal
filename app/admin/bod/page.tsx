@@ -1,6 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
-import BODAdminClient from "./BODAdminClient";
+import BODAdminClient, { BODMemberAdmin } from "./BODAdminClient";
 
 export default async function ManageBODPage() {
   const supabase = createClient();
@@ -9,14 +9,14 @@ export default async function ManageBODPage() {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect('/login');
 
-  let members = [];
+  let members: BODMemberAdmin[] = [];
   try {
     const { data } = await supabase
       .from('bod_members')
       .select('*')
       .order('display_order', { ascending: true });
       
-    if (data) members = data;
+    if (data) members = data as BODMemberAdmin[];
   } catch (err) {
     // Suppress error for preview
   }
