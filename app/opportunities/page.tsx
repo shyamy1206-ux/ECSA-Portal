@@ -1,15 +1,18 @@
-import { createClient } from "@/lib/supabase/server";
-import { Briefcase, Clock, ChevronRight } from "lucide-react";
+import { createStaticClient } from "@/lib/supabase/static";
+import { Briefcase, Calendar, ChevronRight, ExternalLink } from "lucide-react";
+import { EmptyState } from "@/components/ui/EmptyState";
+import Link from "next/link";
+import { format } from "date-fns";
 
 export const revalidate = 60;
 
 export default async function OpportunitiesPage() {
-  const supabase = createClient();
+  const supabase = createStaticClient();
   
   const { data: opportunities } = await supabase
     .from('opportunities')
     .select('*')
-    .eq('status', 'open')
+    .eq('status', 'approved')
     .order('created_at', { ascending: false });
 
   return (
@@ -23,35 +26,63 @@ export default async function OpportunitiesPage() {
 
       <div className="space-y-4">
         {opportunities && opportunities.length > 0 ? (
-          opportunities.map((opp: any) => (
-            <a key={opp.id} href={opp.link} target="_blank" rel="noopener noreferrer" className="block group">
+          opportunities.map((opp: any) => {
+            const hasExternalUrl = !!opp.external_url;
+            const cardContent = (
               <div className="glass p-6 rounded-2xl border border-white/10 hover:border-electric-blue/50 transition-all flex flex-col md:flex-row justify-between md:items-center gap-4">
                 <div>
-                  <div className="flex items-center gap-3 mb-2">
+                  <div className="flex flex-wrap items-center gap-3 mb-3">
                     <h3 className="font-bold text-xl text-white group-hover:text-electric-blue transition-colors">{opp.title}</h3>
-                    <span className="px-2 py-0.5 text-xs rounded bg-white/10 text-gray-300 uppercase tracking-wider font-medium">
-                      {(opp.type || 'Opportunity').replace('_', ' ')}
+                    <span className="px-3 py-1 text-xs rounded-full bg-electric-violet/20 text-electric-violet uppercase tracking-wider font-bold">
+                      {opp.category || 'Opportunity'}
                     </span>
                   </div>
-                  <div className="flex items-center gap-4 text-sm text-gray-400">
-                    <span className="flex items-center gap-1"><Briefcase size={14} /> {opp.company}</span>
-                    <span className="flex items-center gap-1"><Clock size={14} /> {new Date(opp.created_at).toLocaleDateString()}</span>
+                  
+                  {opp.description && (
+                    <p className="text-sm text-gray-300 mb-4 max-w-3xl line-clamp-2">
+                      {opp.description}
+                    </p>
+                  )}
+                  
+                  <div className="flex flex-wrap items-center gap-4 text-sm text-gray-400">
+                    {opp.eligibility && (
+                      <span className="flex items-center gap-1 bg-white/5 px-2 py-1 rounded">
+                        <Briefcase size={14} className="text-gray-500" /> {opp.eligibility}
+                      </span>
+                    )}
+                    {opp.deadline && (
+                      <span className="flex items-center gap-1 text-electric-cyan/80">
+                        <Calendar size={14} /> Deadline: {format(new Date(opp.deadline), "MMM d, yyyy")}
+                      </span>
+                    )}
                   </div>
                 </div>
                 
-                <div className="flex items-center justify-between md:justify-end text-electric-cyan opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
-                  <span className="text-sm font-bold mr-2">Apply Now</span>
-                  <ChevronRight size={18} />
-                </div>
+                {hasExternalUrl && (
+                  <div className="flex items-center justify-between md:justify-end text-electric-cyan md:opacity-0 md:-translate-x-2 md:group-hover:opacity-100 md:group-hover:translate-x-0 transition-all mt-4 md:mt-0">
+                    <span className="text-sm font-bold mr-2">Apply Externally</span>
+                    <ExternalLink size={18} />
+                  </div>
+                )}
               </div>
-            </a>
-          ))
+            );
+
+            return hasExternalUrl ? (
+              <a key={opp.id} href={opp.external_url} target="_blank" rel="noopener noreferrer" className="block group">
+                {cardContent}
+              </a>
+            ) : (
+              <div key={opp.id} className="block group cursor-default">
+                {cardContent}
+              </div>
+            );
+          })
         ) : (
-          <div className="glass p-16 rounded-3xl border border-white/5 text-center flex flex-col items-center justify-center">
-             <Briefcase size={48} className="text-gray-600 mb-4" />
-             <h3 className="text-xl font-bold text-white mb-2">No Open Opportunities</h3>
-             <p className="text-gray-400 max-w-md">Our alumni and partners are currently preparing new postings. Check back soon!</p>
-          </div>
+          <EmptyState 
+            title="No Open Opportunities"
+            description="Our alumni and partners are currently preparing new postings. Check back soon for internships, jobs, and hackathons!"
+            icon={<Briefcase size={48} />}
+          />
         )}
       </div>
     </div>

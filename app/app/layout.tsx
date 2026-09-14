@@ -1,37 +1,58 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { User, Shield, LogOut } from "lucide-react";
+import { Shield, LayoutDashboard, User, FolderGit2, LifeBuoy, GraduationCap, Inbox } from "lucide-react";
+import LogoutButton from "@/components/auth/LogoutButton";
+import NotificationBell from "@/components/ui/NotificationBell";
+import { GlobalSearch } from "@/components/ui/GlobalSearch";
 
-export default async function AppLayout({
+export default async function StudentAppLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   const supabase = createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const { data: { session } } = await supabase.auth.getSession();
 
-  if (!user) {
+  if (!session) {
     redirect('/login');
   }
 
+  const user = session.user;
+
   return (
-    <div className="min-h-screen flex">
-      {/* Sidebar */}
-      <aside className="w-64 glass border-r border-white/10 hidden md:flex flex-col">
-        <div className="p-6">
-          <Link href="/app" className="text-xl font-heading font-bold text-electric-blue">
-            ECSA Portal
-          </Link>
+    <div className="min-h-screen bg-[#05070A] flex flex-col md:flex-row pt-20">
+      {/* Sidebar / Navigation */}
+      <aside className="w-full md:w-64 shrink-0 border-r border-white/10 p-6 flex flex-col gap-6 relative z-10 bg-[#05070A]/80 backdrop-blur-xl">
+        <div className="mb-4">
+          <h2 className="text-xl font-heading font-bold text-white tracking-wider">ECSA PASSPORT</h2>
+          <p className="text-xs text-electric-cyan font-mono mt-1 mb-6">ID: {session.user.id.substring(0,8).toUpperCase()}</p>
+          <GlobalSearch />
         </div>
-        
-        <nav className="flex-1 px-4 flex flex-col gap-2">
-          <Link href="/app" className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-white/5 transition-colors border-l-2 border-transparent hover:border-electric-blue text-gray-300 hover:text-white">
-            <User size={18} />
+
+        <nav className="flex flex-col gap-2">
+          <Link href="/app" className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-white/5 transition-colors border-l-2 border-transparent hover:border-electric-blue text-gray-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-electric-blue">
+            <User size={18} aria-hidden="true" />
             <span>Dashboard</span>
           </Link>
-          <Link href="/admin" className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-white/5 transition-colors border-l-2 border-transparent hover:border-electric-blue text-gray-300 hover:text-white">
-            <Shield size={18} />
+          <Link href="/app/projects" className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-white/5 transition-colors border-l-2 border-transparent hover:border-electric-blue text-gray-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-electric-blue">
+            <FolderGit2 size={18} aria-hidden="true" />
+            <span>My Projects</span>
+          </Link>
+          <Link href="/app/mentorship" className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-white/5 transition-colors border-l-2 border-transparent hover:border-electric-blue text-gray-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-electric-blue">
+            <GraduationCap size={18} aria-hidden="true" />
+            <span>Mentorship</span>
+          </Link>
+          <Link href="/app/inbox" className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-white/5 transition-colors border-l-2 border-transparent hover:border-electric-blue text-gray-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-electric-blue">
+            <Inbox size={18} aria-hidden="true" />
+            <span>Inbox</span>
+          </Link>
+          <Link href="/app/services" className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-white/5 transition-colors border-l-2 border-transparent hover:border-electric-blue text-gray-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-electric-blue">
+            <LifeBuoy size={18} aria-hidden="true" />
+            <span>Campus Services</span>
+          </Link>
+          <Link href="/admin" className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-white/5 transition-colors border-l-2 border-transparent hover:border-electric-blue text-gray-300 hover:text-white mt-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-electric-blue">
+            <Shield size={18} aria-hidden="true" />
             <span>Admin Center</span>
           </Link>
         </nav>
@@ -44,9 +65,8 @@ export default async function AppLayout({
             <div className="flex-1 truncate">
               {user.email}
             </div>
-            <button className="hover:text-white">
-              <LogOut size={16} />
-            </button>
+            <NotificationBell />
+            <LogoutButton />
           </div>
         </div>
       </aside>

@@ -2,9 +2,12 @@ import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import LenisProvider from "@/components/layout/LenisProvider";
+import dynamic from "next/dynamic";
 import CustomCursor from "@/components/ui/CustomCursor";
-import BackgroundCanvas from "@/components/3d/BackgroundCanvas";
 import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
+import { ToastProvider } from "@/components/ui/Toast";
+import { RealtimeProvider } from "@/components/providers/RealtimeProvider";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space-grotesk" });
@@ -14,6 +17,9 @@ export const metadata: Metadata = {
   description: "Electronics & Computer Students Association - Create | Connect | Build",
 };
 
+import { ScrollStoryProvider } from "@/components/scroll-story/ScrollStoryContext";
+import AnimatedProcessorBackground from "@/components/layout/AnimatedProcessorBackground";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -21,19 +27,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${spaceGrotesk.variable} font-sans antialiased bg-navy-900 text-white overflow-x-hidden`}>
-        <LenisProvider>
-          <CustomCursor />
-          {/* 3D Global Background */}
-          <div className="fixed inset-0 z-0 pointer-events-none">
-            <BackgroundCanvas />
-          </div>
-          {/* Main Content */}
-          <Navbar />
-          <main className="relative z-10 flex min-h-screen flex-col">
-            {children}
-          </main>
-        </LenisProvider>
+      <body className={`${inter.variable} ${spaceGrotesk.variable} font-sans antialiased bg-navy-900 text-white overflow-x-hidden flex flex-col min-h-screen`}>
+        <RealtimeProvider>
+          <ToastProvider>
+            <LenisProvider>
+              <ScrollStoryProvider>
+                <CustomCursor />
+                <AnimatedProcessorBackground />
+                <Navbar />
+                <main className="relative z-10 flex-grow flex flex-col">
+                  {children}
+                </main>
+                <Footer />
+              </ScrollStoryProvider>
+            </LenisProvider>
+          </ToastProvider>
+        </RealtimeProvider>
       </body>
     </html>
   );

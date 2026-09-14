@@ -47,8 +47,11 @@ export default function HoDPage() {
               &quot;Create. Connect. Build. We don&apos;t just study technology; we shape the future of it.&quot;
             </p>
           </div>
+
         </div>
       </div>
     </div>
   );
 }
+
+

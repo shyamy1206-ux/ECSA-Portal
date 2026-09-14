@@ -1,6 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
-import { Search, Filter, MessageSquare, Briefcase, GraduationCap, Users } from "lucide-react";
-import MagneticButton from "@/components/ui/MagneticButton";
+import { Search, Filter, Users } from "lucide-react";
+import { MentorCard } from "@/components/mentorship/MentorCard";
 
 export const revalidate = 60;
 
@@ -12,6 +12,9 @@ export default async function MentorshipNetwork() {
     .select('*, profiles(full_name)')
     .eq('is_available', true);
 
+  // Derive filter options dynamically from actual data
+  const companies = Array.from(new Set((mentors || []).map((m: any) => m.company).filter(Boolean)));
+
   return (
     <div className="min-h-screen pt-24 px-8 max-w-7xl mx-auto flex flex-col h-screen pb-8">
       <div className="mb-8 shrink-0">
@@ -22,8 +25,8 @@ export default async function MentorshipNetwork() {
       </div>
 
       <div className="flex-1 flex gap-6 min-h-0">
-        {/* Glassmorphism Filter Sidebar */}
-        <div className="w-80 glass rounded-2xl p-6 flex flex-col border border-white/10 shrink-0">
+        {/* Filter Sidebar */}
+        <div className="w-80 glass rounded-2xl p-6 flex flex-col border border-white/10 shrink-0 hidden md:flex">
           <div className="relative mb-6">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={18} />
             <input 
@@ -38,62 +41,28 @@ export default async function MentorshipNetwork() {
           </h3>
 
           <div className="space-y-6 flex-1 overflow-y-auto custom-scrollbar">
-            <div>
-              <h4 className="text-sm font-medium mb-3">Company</h4>
-              <div className="space-y-2">
-                {/* Real implementation would derive this dynamically from the mentors list */}
-                {["Google", "AWS", "Vercel", "Microsoft"].map(company => (
-                  <label key={company} className="flex items-center gap-2 text-sm text-gray-300 hover:text-white cursor-pointer">
-                    <input type="checkbox" className="rounded border-white/20 bg-black/40 text-electric-blue focus:ring-electric-blue" />
-                    {company}
-                  </label>
-                ))}
+            {companies.length > 0 && (
+              <div>
+                <h4 className="text-sm font-medium mb-3">Company</h4>
+                <div className="space-y-2">
+                  {companies.map(company => (
+                    <label key={company} className="flex items-center gap-2 text-sm text-gray-300 hover:text-white cursor-pointer">
+                      <input type="checkbox" className="rounded border-white/20 bg-black/40 text-electric-blue focus:ring-electric-blue" />
+                      {company}
+                    </label>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
 
-        {/* Alumni List / Chat Interface */}
+        {/* Alumni Grid */}
         <div className="flex-1 glass rounded-2xl border border-white/10 overflow-hidden flex flex-col">
           {mentors && mentors.length > 0 ? (
             <div className="p-6 grid grid-cols-1 lg:grid-cols-2 gap-4 overflow-y-auto h-full custom-scrollbar">
               {mentors.map((alumnus: any) => (
-                <div key={alumnus.id} className="p-5 rounded-xl bg-black/40 border border-white/10 hover:border-electric-blue/30 transition-colors group">
-                  <div className="flex justify-between items-start mb-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center relative">
-                        {alumnus.profiles?.full_name?.charAt(0) || '?'}
-                        <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-[#111827]"></span>
-                      </div>
-                      <div>
-                        <h4 className="font-medium text-white">{alumnus.profiles?.full_name}</h4>
-                        <p className="text-xs text-gray-400">{alumnus.job_title}</p>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div className="flex flex-col gap-2 mb-6">
-                    <div className="flex items-center gap-2 text-sm text-gray-300">
-                      <Briefcase size={14} className="text-electric-blue" /> {alumnus.company}
-                    </div>
-                    <div className="flex items-center gap-2 text-sm text-gray-300">
-                      <GraduationCap size={14} className="text-electric-magenta" /> Class of {alumnus.graduation_year}
-                    </div>
-                  </div>
-
-                  <div className="flex justify-between items-end">
-                    <div className="flex gap-1 flex-wrap max-w-[200px]">
-                      {alumnus.expertise?.map((skill: string) => (
-                        <span key={skill} className="text-[10px] px-2 py-1 rounded bg-white/5 text-gray-400">{skill}</span>
-                      ))}
-                    </div>
-                    <MagneticButton>
-                      <button className="p-2 bg-white/5 group-hover:bg-electric-blue group-hover:text-navy-900 rounded-lg transition-colors text-white">
-                        <MessageSquare size={16} />
-                      </button>
-                    </MagneticButton>
-                  </div>
-                </div>
+                <MentorCard key={alumnus.id} mentor={alumnus} />
               ))}
             </div>
           ) : (

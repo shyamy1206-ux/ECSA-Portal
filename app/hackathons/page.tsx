@@ -3,8 +3,10 @@
 import { useState } from "react";
 import { motion, LayoutGroup } from "framer-motion";
 
+type Student = { id: string; name: string; role: string; skills: string[] };
+
 // In a production environment, this would fetch from a 'hackathon_teams' or 'recruitment' table via Supabase
-const initialColumns = {
+const initialColumns: Record<string, Student[]> = {
   "available": [],
   "shortlisted": [],
   "team": []

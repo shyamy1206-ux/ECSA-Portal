@@ -1,18 +1,18 @@
-import { createClient } from "@/lib/supabase/server";
+import { createStaticClient } from "@/lib/supabase/static";
 import MagneticButton from "@/components/ui/MagneticButton";
 import Link from "next/link";
 import { Users } from "lucide-react";
-
+import { EmptyState } from "@/components/ui/EmptyState";
 export const revalidate = 60;
 
 export default async function ClubsDirectory() {
-  const supabase = createClient();
+  const supabase = createStaticClient();
   
-  // Fetch real clubs that are approved/active
+  // Fetch real clubs that are approved
   const { data: clubs } = await supabase
     .from('clubs')
     .select('*')
-    .eq('status', 'active')
+    .eq('status', 'approved')
     .order('name', { ascending: true });
 
   return (
@@ -23,6 +23,7 @@ export default async function ClubsDirectory() {
           Discover the official student organizations at NMIET. Join a club to collaborate on projects, host events, and build your network.
         </p>
       </div>
+
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {clubs && clubs.length > 0 ? (
@@ -51,10 +52,12 @@ export default async function ClubsDirectory() {
             </Link>
           ))
         ) : (
-          <div className="col-span-full glass p-12 rounded-3xl border border-white/5 flex flex-col items-center justify-center text-center">
-            <Users size={40} className="text-gray-600 mb-4" />
-            <h3 className="text-xl font-bold text-white mb-2">Club information will be updated soon</h3>
-            <p className="text-gray-400 max-w-md">Our active clubs are currently being migrated to the new ECSA platform.</p>
+          <div className="col-span-full">
+            <EmptyState 
+              title="Content will be updated soon." 
+              description="Our active clubs are currently being migrated to the new ECSA platform."
+              icon={<Users size={24} />}
+            />
           </div>
         )}
 
@@ -74,3 +77,5 @@ export default async function ClubsDirectory() {
     </div>
   );
 }
+
+

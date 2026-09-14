@@ -28,7 +28,7 @@ Create a new project on [Supabase](https://supabase.com/).
 Create a `.env.local` file in the root of your project and add your credentials (found in Supabase > Settings > API):
 ```env
 NEXT_PUBLIC_SUPABASE_URL=https://your-project-id.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key-here
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your-anon-key-here
 ```
 
 **Database Migrations:**
@@ -68,7 +68,7 @@ This project is highly optimized for deployment on Vercel.
 1. Push your code to a GitHub repository.
 2. Log in to [Vercel](https://vercel.com/) and click **Add New Project**.
 3. Import your GitHub repository.
-4. **Important:** Add the two environment variables (`NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`) in the Vercel deployment settings.
+4. **Important:** Add the two environment variables (`NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`) in the Vercel deployment settings.
 5. Click **Deploy**.
 
 Vercel will automatically handle Next.js Server Components, Image Optimization, and Edge caching.

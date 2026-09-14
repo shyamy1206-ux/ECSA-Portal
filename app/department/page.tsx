@@ -10,6 +10,7 @@ export default function DepartmentPage() {
         </p>
       </div>
 
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
         <div className="glass p-8 rounded-3xl border border-white/10 hover:border-electric-blue/30 transition-colors">
           <Cpu className="text-electric-blue mb-4" size={32} />
@@ -57,3 +58,5 @@ export default function DepartmentPage() {
     </div>
   );
 }
+
+

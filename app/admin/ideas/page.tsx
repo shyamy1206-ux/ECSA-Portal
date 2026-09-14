@@ -45,7 +45,7 @@ export default async function AdminIdeaHubPage() {
               </div>
               
               <p className="text-gray-300 flex-1 mb-6 text-sm leading-relaxed">
-                "{idea.content}"
+                &quot;{idea.content}&quot;
               </p>
               
               <div className="flex items-center justify-between mt-auto pt-4 border-t border-white/10">

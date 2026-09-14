@@ -11,6 +11,7 @@ export default function AboutPage() {
         </p>
       </div>
 
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
         {/* HoD Profile */}
         <div className="glass p-8 rounded-3xl border border-white/10 relative overflow-hidden group hover:border-electric-blue/30 transition-colors">
@@ -36,7 +37,7 @@ export default function AboutPage() {
           <h2 className="text-2xl font-heading font-bold text-white mb-1">Dr. Priyanka Patil</h2>
           <p className="text-electric-magenta text-sm font-bold uppercase tracking-wider mb-6">Faculty Coordinator</p>
           <p className="text-gray-400 text-sm leading-relaxed">
-            The guiding force behind ECSA's student initiatives. She mentors the Board of Directors, oversees club activities, and ensures that student projects and events align with the department's standard of excellence.
+            The guiding force behind ECSA&apos;s student initiatives. She mentors the Board of Directors, oversees club activities, and ensures that student projects and events align with the department&apos;s standard of excellence.
           </p>
         </div>
       </div>
@@ -55,3 +56,5 @@ export default function AboutPage() {
     </div>
   );
 }
+
+

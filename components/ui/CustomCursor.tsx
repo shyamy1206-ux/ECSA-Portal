@@ -38,8 +38,17 @@ export default function CustomCursor() {
     };
   }, []);
 
-  // Hide cursor on touch devices
-  if (typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches) {
+  const [isTouch, setIsTouch] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    if (window.matchMedia("(pointer: coarse)").matches) {
+      setIsTouch(true);
+    }
+  }, []);
+
+  if (!mounted || isTouch) {
     return null;
   }
 

@@ -10,7 +10,7 @@ export async function updateSession(request: NextRequest) {
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
     {
       cookies: {
         get(name: string) {
@@ -54,18 +54,57 @@ export async function updateSession(request: NextRequest) {
     }
   )
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
+  let user = null
+  try {
+    const { data } = await supabase.auth.getUser()
+    user = data.user
+  } catch (e) {
+    // Silently ignore auth errors in middleware to prevent 500s on misconfiguration
+  }
+
+  // Allow access to health check in development without auth
+  const isHealthCheck = request.nextUrl.pathname === '/admin/health'
+  const isDev = process.env.NODE_ENV === 'development'
 
   // Protect /app and /admin routes
   if (
     !user &&
+    ! (isDev && isHealthCheck) &&
     (request.nextUrl.pathname.startsWith('/app') || request.nextUrl.pathname.startsWith('/admin'))
   ) {
     const url = request.nextUrl.clone()
     url.pathname = '/login'
     return NextResponse.redirect(url)
+  }
+
+  // Admin Role Check
+  if (
+    user && 
+    request.nextUrl.pathname.startsWith('/admin') && 
+    !(isDev && isHealthCheck)
+  ) {
+    try {
+      const { data: roleData, error } = await supabase
+        .from('user_roles')
+        .select('role')
+        .eq('user_id', user.id)
+        .in('role', ['ecsa_admin', 'super_admin'])
+        .limit(1)
+        .maybeSingle();
+
+      if (error || !roleData) {
+        const url = request.nextUrl.clone();
+        url.pathname = '/app';
+        url.searchParams.set('error', 'unauthorized');
+        return NextResponse.redirect(url);
+      }
+    } catch (e) {
+      // If fetching fails, default to denied
+      const url = request.nextUrl.clone();
+      url.pathname = '/app';
+      url.searchParams.set('error', 'unauthorized');
+      return NextResponse.redirect(url);
+    }
   }
 
   return supabaseResponse

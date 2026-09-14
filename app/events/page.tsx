@@ -1,12 +1,13 @@
-import { createClient } from "@/lib/supabase/server";
+import { createStaticClient } from "@/lib/supabase/static";
 import MagneticButton from "@/components/ui/MagneticButton";
 import { Calendar, MapPin, Users } from "lucide-react";
 import Link from "next/link";
+import { EmptyState } from "@/components/ui/EmptyState";
 
 export const revalidate = 60; // Revalidate cache every 60 seconds
 
 export default async function EventsPage() {
-  const supabase = createClient();
+  const supabase = createStaticClient();
   
   // Fetch real events from Supabase
   const { data: events } = await supabase
@@ -24,6 +25,7 @@ export default async function EventsPage() {
             Discover upcoming workshops, seminars, and hackathons hosted by ECSA and departmental clubs.
           </p>
         </div>
+
       </div>
 
       <div className="space-y-6">
@@ -96,13 +98,15 @@ export default async function EventsPage() {
             );
           })
         ) : (
-          <div className="glass p-16 rounded-3xl border border-white/5 text-center flex flex-col items-center justify-center">
-             <Calendar size={48} className="text-gray-600 mb-4" />
-             <h3 className="text-xl font-bold text-white mb-2">No upcoming events yet</h3>
-             <p className="text-gray-400">Our club coordinators are planning something great. Check back soon!</p>
-          </div>
+          <EmptyState 
+            title="To be announced."
+            description="Our club coordinators are planning something great. Check back soon!"
+            icon={<Calendar size={32} />}
+          />
         )}
       </div>
     </div>
   );
 }
+
+
