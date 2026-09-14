@@ -117,7 +117,7 @@ export default async function BoardOfDirectorsPage() {
                     alt={`${member.full_name} - ${member.post}`}
                     fill
                     sizes="(max-width: 640px) 100vw, 300px"
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
                   />
                 ) : (
                   <div className="absolute inset-0 flex items-center justify-center">
