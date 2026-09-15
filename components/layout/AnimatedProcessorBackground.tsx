@@ -46,7 +46,7 @@ export default function AnimatedProcessorBackground() {
             className="absolute inset-0 overflow-hidden bg-[#0a1020]"
           >
             <div className="absolute inset-0 opacity-40 [background-image:linear-gradient(90deg,transparent_49%,#09d9ff_50%,transparent_51%),linear-gradient(0deg,transparent_49%,#09d9ff_50%,transparent_51%)] [background-size:70px_70px]" />
-            <div className="absolute left-1/2 top-1/2 h-48 w-48 -translate-x-1/2 -translate-y-1/2 rounded-full blur-[100px] border border-cyan-400/50 bg-slate-900 shadow-[0_0_80px_rgba(0,210,255,0.35)]" />
+            <div className="absolute left-1/2 top-1/2 h-48 w-48 -translate-x-1/2 -translate-y-1/2 rounded-full blur-[100px] border border-cyan-400/50 bg-slate-900 " />
           </div>
         ) : (
           <Image

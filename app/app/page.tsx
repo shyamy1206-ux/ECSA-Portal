@@ -88,7 +88,7 @@ export default async function StudentDashboard({
         
         {/* ECSA Passport Card */}
         <div className={`glass p-6 rounded-3xl border flex flex-col items-center text-center relative overflow-hidden ${
-          bodRole ? 'border-yellow-500/50 shadow-[0_0_30px_rgba(234,179,8,0.15)]' : 'border-white/10'
+          bodRole ? 'border-yellow-500/50 ' : 'border-white/10'
         }`}>
           <div className={`absolute top-0 left-0 w-full h-24 bg-gradient-to-br ${
             bodRole ? 'from-yellow-500/30' : 'from-electric-blue/20'

@@ -79,7 +79,7 @@ export default function NotificationBell() {
       >
         <Bell size={20} aria-hidden="true" />
         {hasUnread && (
-          <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-electric-cyan rounded-full animate-pulse shadow-[0_0_8px_rgba(0,229,255,0.8)]" aria-label="Unread notifications"></span>
+          <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-electric-cyan rounded-full animate-pulse " aria-label="Unread notifications"></span>
         )}
       </button>
 

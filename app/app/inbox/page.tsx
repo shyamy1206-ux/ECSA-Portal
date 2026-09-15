@@ -62,7 +62,7 @@ export default async function InboxPage() {
             {notifications.map((notif: any) => (
               <div key={notif.id} className={`p-6 flex gap-4 transition-colors relative group ${notif.is_read ? 'opacity-70 bg-transparent' : 'bg-white/5'}`}>
                 {!notif.is_read && (
-                  <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-electric-cyan rounded-r-full shadow-[0_0_8px_rgba(0,229,255,0.8)]"></span>
+                  <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-electric-cyan rounded-r-full "></span>
                 )}
                 
                 <div className="mt-1 shrink-0">

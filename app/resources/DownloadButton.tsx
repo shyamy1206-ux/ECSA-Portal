@@ -57,7 +57,7 @@ export default function DownloadButton({ url }: { url?: string }) {
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             exit={{ scale: 0 }}
-            className="text-green-400 drop-shadow-[0_0_5px_rgba(74,222,128,0.5)]"
+            className="text-green-400 drop-"
           >
             <Check size={18} strokeWidth={3} />
           </motion.div>

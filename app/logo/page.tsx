@@ -14,12 +14,12 @@ export default function BrandPage() {
           <h2 className="text-2xl font-bold text-white mb-6">Color Palette</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="flex flex-col gap-2">
-              <div className="h-24 rounded-xl bg-[#00f0ff] border border-white/10 shadow-[0_0_20px_rgba(0,240,255,0.3)]"></div>
+              <div className="h-24 rounded-xl bg-[#00f0ff] border border-white/10 "></div>
               <span className="font-mono text-sm text-gray-300">#00f0ff</span>
               <span className="text-xs text-gray-500 font-bold uppercase">Electric Blue</span>
             </div>
             <div className="flex flex-col gap-2">
-              <div className="h-24 rounded-xl bg-[#00ffcc] border border-white/10 shadow-[0_0_20px_rgba(0,255,204,0.3)]"></div>
+              <div className="h-24 rounded-xl bg-[#00ffcc] border border-white/10 "></div>
               <span className="font-mono text-sm text-gray-300">#00ffcc</span>
               <span className="text-xs text-gray-500 font-bold uppercase">Electric Cyan</span>
             </div>

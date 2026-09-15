@@ -101,7 +101,7 @@ export default async function ResourceVault({
                 <tr key={res.id} className="hover:bg-white/5 transition-colors group">
                   <td className="px-4 py-4 flex items-center gap-3">
                     {res.type === 'folder' ? (
-                      <div className="relative w-8 h-8 flex items-center justify-center drop-shadow-[0_0_8px_rgba(0,240,255,0.3)]">
+                      <div className="relative w-8 h-8 flex items-center justify-center drop-">
                          <Folder className="text-electric-blue absolute" fill="currentColor" size={24} />
                          <Folder className="text-white opacity-20 absolute translate-y-0.5" size={24} />
                       </div>

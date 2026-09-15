@@ -22,7 +22,7 @@ export function ScrollStorySection({ id, children, className = "" }: Props) {
   }, [isInView, id, setActiveChapter]);
 
   return (
-    <div ref={ref} id={id} className={`relative z-10 w-full min-h-screen ${className}`}>
+    <div ref={ref} id={id} className={`relative z-10 w-full py-24 md:py-32 ${className}`}>
       {children}
     </div>
   );

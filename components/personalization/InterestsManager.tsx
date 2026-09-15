@@ -81,7 +81,7 @@ export function InterestsManager({ initialInterests = [] }: { initialInterests?:
               onClick={() => toggleInterest(interest)}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all flex items-center gap-2 ${
                 isSelected 
-                  ? 'bg-electric-cyan text-black shadow-[0_0_15px_rgba(0,229,255,0.4)]' 
+                  ? 'bg-electric-cyan text-black ' 
                   : 'bg-black/40 text-gray-400 border border-white/10 hover:border-white/30'
               }`}
             >
