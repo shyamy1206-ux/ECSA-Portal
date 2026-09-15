@@ -32,7 +32,7 @@ export default async function StudentDashboard({
   const { data: bodMatch } = await supabase
     .from('bod_members')
     .select('post')
-    .eq('user_id', user.id)
+    .eq('user_id', session.user.id)
     .eq('is_active', true)
     .maybeSingle();
   
