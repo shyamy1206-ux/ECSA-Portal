@@ -5,6 +5,7 @@ import MagneticButton from "@/components/ui/MagneticButton";
 import Link from "next/link";
 import EventGallerySection from "@/components/ui/EventGallerySection";
 import { ViewTracker } from "@/components/ui/ViewTracker";
+import { RegisterButton } from "@/components/events/RegisterButton";
 
 export const revalidate = 60;
 
@@ -88,18 +89,7 @@ export default async function EventDetailPage({ params }: { params: { id: string
             </div>
 
             <div className="pt-6 border-t border-white/10">
-              <MagneticButton>
-                <button 
-                  disabled={isPast || isFull}
-                  className={`w-full py-4 rounded-xl font-bold text-center transition-colors ${
-                    isPast ? 'bg-white/5 text-gray-500 cursor-not-allowed' :
-                    isFull ? 'bg-white/5 text-gray-500 cursor-not-allowed' :
-                    'bg-white text-navy-900 hover:bg-electric-blue'
-                  }`}
-                >
-                  {isPast ? 'Event Ended' : isFull ? 'Registration Full' : 'Register Now'}
-                </button>
-              </MagneticButton>
+              <RegisterButton eventId={event.id} isPast={isPast} isFull={isFull} />
             </div>
           </div>
         </div>
