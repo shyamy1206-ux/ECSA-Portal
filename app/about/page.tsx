@@ -6,7 +6,7 @@ export default function AboutPage() {
       <div className="mb-16">
         <h1 className="text-4xl md:text-6xl font-heading font-bold mb-6 text-white">About ECSA</h1>
         <p className="text-gray-300 text-lg leading-relaxed max-w-3xl">
-          The <span className="text-electric-cyan font-semibold">Electronics & Computer Students Association (ECSA)</span> is the premier departmental organization at PCET’s Nutan Maharashtra Institute of Engineering & Technology (NMIET). 
+          The <span className="text-electric-cyan font-medium">Electronics & Computer Students Association (ECSA)</span> is the premier departmental organization at PCET’s Nutan Maharashtra Institute of Engineering & Technology (NMIET). 
           We are dedicated to fostering innovation, technical excellence, and community among students in the EST-2026-27 academic session.
         </p>
       </div>

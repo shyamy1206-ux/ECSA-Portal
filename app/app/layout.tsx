@@ -27,7 +27,7 @@ export default async function StudentAppLayout({
         <div className="mb-4">
           <Link href="/" className="text-xl font-heading font-bold flex items-center gap-2 mb-2">
             <span className="text-electric-blue">ECSA</span>
-            <span className="text-gray-500 font-light hidden sm:inline">| NMIET</span>
+            <span className="text-gray-500 font-normal hidden sm:inline">| NMIET</span>
           </Link>
           <p className="text-xs text-electric-cyan font-mono mt-1 mb-6">Passport ID: {session.user.id.substring(0,8).toUpperCase()}</p>
           <GlobalSearch />

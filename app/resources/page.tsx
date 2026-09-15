@@ -48,7 +48,7 @@ export default async function ResourceVault({
         <div className="flex flex-wrap gap-2">
           <Link 
             href={`/resources${q ? `?q=${q}` : ''}`}
-            className={`px-4 py-1.5 rounded-full text-sm font-semibold transition-colors ${!category ? 'bg-electric-blue text-navy-900' : 'bg-white/5 text-gray-300 hover:bg-white/10'}`}
+            className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${!category ? 'bg-electric-blue text-navy-900' : 'bg-white/5 text-gray-300 hover:bg-white/10'}`}
           >
             All
           </Link>
@@ -56,7 +56,7 @@ export default async function ResourceVault({
             <Link 
               key={cat}
               href={`/resources?category=${encodeURIComponent(cat)}${q ? `&q=${encodeURIComponent(q)}` : ''}`}
-              className={`px-4 py-1.5 rounded-full text-sm font-semibold transition-colors capitalize ${category === cat ? 'bg-electric-blue text-navy-900' : 'bg-white/5 text-gray-300 hover:bg-white/10'}`}
+              className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors capitalize ${category === cat ? 'bg-electric-blue text-navy-900' : 'bg-white/5 text-gray-300 hover:bg-white/10'}`}
             >
               {cat}
             </Link>

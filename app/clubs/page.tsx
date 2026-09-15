@@ -68,7 +68,7 @@ export default async function ClubsDirectory() {
             Have an idea for a new departmental club? Submit a proposal to the ECSA Board.
           </p>
           <MagneticButton>
-            <Link href="/app/club-proposal" className="px-6 py-2 bg-white/10 hover:bg-white/20 text-white text-sm font-semibold rounded-full transition-colors">
+            <Link href="/app/club-proposal" className="px-6 py-2 bg-white/10 hover:bg-white/20 text-white text-sm font-medium rounded-full transition-colors">
               Submit Proposal
             </Link>
           </MagneticButton>

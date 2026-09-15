@@ -55,7 +55,7 @@ export default async function AdminLayout({
         <div className="p-6">
           <Link href="/" className="text-xl font-heading font-bold flex items-center gap-2">
             <span className="text-electric-blue">ECSA</span>
-            <span className="text-gray-500 font-light hidden sm:inline">| NMIET</span>
+            <span className="text-gray-500 font-normal hidden sm:inline">| NMIET</span>
             <span className="text-xs text-electric-cyan px-2 py-0.5 rounded bg-electric-blue/10 border border-electric-blue/20 ml-2">Admin</span>
           </Link>
         </div>
@@ -63,7 +63,7 @@ export default async function AdminLayout({
         <nav className="flex-1 px-4 flex flex-col gap-1 overflow-y-auto">
           <NavItem href="/admin" icon={<LayoutDashboard size={18} />} label="Overview" />
           
-          <div className="mt-4 mb-1 px-4 text-xs font-semibold text-gray-600 uppercase tracking-wider">Campus</div>
+          <div className="mt-4 mb-1 px-4 text-xs font-medium text-gray-600 uppercase tracking-wider">Campus</div>
           <NavItem href="/admin/bod" icon={<Users size={18} />} label="Board of Directors" />
           <NavItem href="/admin/clubs" icon={<Users size={18} />} label="Clubs" />
           <NavItem href="/admin/recruitment" icon={<UserCheck size={18} />} label="Recruitment" />
@@ -75,12 +75,12 @@ export default async function AdminLayout({
           <NavItem href="/admin/announcements" icon={<Megaphone size={18} />} label="Announcements" />
           <NavItem href="/admin/ideas" icon={<Lightbulb size={18} />} label="Ideas" />
           
-          <div className="mt-4 mb-1 px-4 text-xs font-semibold text-gray-600 uppercase tracking-wider">Services</div>
+          <div className="mt-4 mb-1 px-4 text-xs font-medium text-gray-600 uppercase tracking-wider">Services</div>
           <NavItem href="/admin/helpdesk" icon={<HelpCircle size={18} />} label="Helpdesk" />
           <NavItem href="/admin/lost-and-found" icon={<Package size={18} />} label="Lost & Found" />
           <NavItem href="/admin/passport" icon={<Ticket size={18} />} label="Passport Scanner" />
           
-          <div className="mt-4 mb-1 px-4 text-xs font-semibold text-gray-600 uppercase tracking-wider">System</div>
+          <div className="mt-4 mb-1 px-4 text-xs font-medium text-gray-600 uppercase tracking-wider">System</div>
           <NavItem href="/admin/users" icon={<Users size={18} />} label="Users & Roles" />
           <NavItem href="/admin/audit-logs" icon={<ScrollText size={18} />} label="Audit Logs" />
           <NavItem href="/admin/settings" icon={<Settings size={18} />} label="Settings" />
@@ -92,7 +92,7 @@ export default async function AdminLayout({
               {user.email?.charAt(0).toUpperCase()}
             </div>
             <div className="flex-1 truncate">
-              <p className="font-semibold text-white truncate">{user.email?.split('@')[0]}</p>
+              <p className="font-medium text-white truncate">{user.email?.split('@')[0]}</p>
               <p className="text-xs text-electric-blue uppercase tracking-wider">{roleDisplay.replace('_', ' ')}</p>
             </div>
             <LogoutButton />

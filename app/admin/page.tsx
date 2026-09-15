@@ -82,7 +82,7 @@ export default async function AdminOverview() {
         {/* Recent Announcements */}
         <div className="glass p-6 rounded-2xl border border-white/5">
           <div className="flex justify-between items-center mb-4">
-            <h3 className="text-lg font-semibold text-white">Recent Announcements</h3>
+            <h3 className="text-lg font-medium text-white">Recent Announcements</h3>
             <Link href="/admin/announcements" className="text-xs text-electric-blue hover:underline">View All</Link>
           </div>
           {recentAnnouncements && recentAnnouncements.length > 0 ? (
@@ -106,7 +106,7 @@ export default async function AdminOverview() {
 
         {/* Pending Approvals */}
         <div className="glass p-6 rounded-2xl border border-white/5">
-          <h3 className="text-lg font-semibold mb-4 text-white">Pending Approvals</h3>
+          <h3 className="text-lg font-medium mb-4 text-white">Pending Approvals</h3>
           <div className="space-y-3">
             {pendingClubs && pendingClubs.length > 0 && pendingClubs.map((c: any) => (
               <Link key={c.id} href="/admin/clubs" className="flex items-center justify-between p-3 rounded-lg bg-black/20 hover:bg-black/30 transition-colors">
@@ -114,7 +114,7 @@ export default async function AdminOverview() {
                   <p className="font-medium text-white text-sm">{c.name}</p>
                   <p className="text-xs text-gray-500">Club Registration</p>
                 </div>
-                <span className="px-3 py-1.5 text-xs font-semibold bg-white/10 hover:bg-white/20 rounded text-white">Review</span>
+                <span className="px-3 py-1.5 text-xs font-medium bg-white/10 hover:bg-white/20 rounded text-white">Review</span>
               </Link>
             ))}
             {pendingOpps && pendingOpps.length > 0 && pendingOpps.map((o: any) => (
@@ -123,7 +123,7 @@ export default async function AdminOverview() {
                   <p className="font-medium text-white text-sm">{o.title}</p>
                   <p className="text-xs text-gray-500">Opportunity Listing</p>
                 </div>
-                <span className="px-3 py-1.5 text-xs font-semibold bg-white/10 hover:bg-white/20 rounded text-white">Review</span>
+                <span className="px-3 py-1.5 text-xs font-medium bg-white/10 hover:bg-white/20 rounded text-white">Review</span>
               </Link>
             ))}
             {(!pendingClubs || pendingClubs.length === 0) && (!pendingOpps || pendingOpps.length === 0) && (

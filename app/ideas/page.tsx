@@ -59,7 +59,7 @@ export default async function IdeaHubPage() {
             ideas.map((idea) => (
               <div key={idea.id} className="glass p-6 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
                 <div className="flex justify-between items-start mb-4">
-                  <span className="text-xs px-2.5 py-1 rounded-full border bg-electric-cyan/10 text-electric-cyan border-electric-cyan/20 uppercase tracking-wider font-semibold">
+                  <span className="text-xs px-2.5 py-1 rounded-full border bg-electric-cyan/10 text-electric-cyan border-electric-cyan/20 uppercase tracking-wider font-medium">
                     {idea.status.replace('_', ' ')}
                   </span>
                   <span className="text-xs text-gray-500">

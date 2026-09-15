@@ -86,7 +86,7 @@ export default async function ClubProposalPage() {
           </div>
 
           <div className="pt-4 flex justify-end gap-4">
-            <a href="/clubs" className="px-6 py-2.5 text-sm font-semibold text-gray-400 hover:text-white transition-colors">Cancel</a>
+            <a href="/clubs" className="px-6 py-2.5 text-sm font-medium text-gray-400 hover:text-white transition-colors">Cancel</a>
             <button 
               type="submit" 
               className="px-6 py-2.5 bg-electric-blue hover:bg-electric-cyan text-navy-900 text-sm font-bold rounded-lg transition-colors"

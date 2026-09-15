@@ -110,7 +110,7 @@ export default function BODAdminClient({ initialMembers }: { initialMembers: BOD
                   </div>
                 </td>
                 <td className="p-4">
-                  <div className="font-semibold text-white">{member.full_name}</div>
+                  <div className="font-medium text-white">{member.full_name}</div>
                   <div className="text-xs text-electric-cyan tracking-wider uppercase mt-1">{member.post}</div>
                 </td>
                 <td className="p-4">

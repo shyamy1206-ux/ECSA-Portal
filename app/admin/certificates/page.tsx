@@ -16,7 +16,7 @@ export default async function CertificatesAdminPage() {
           <h1 className="text-3xl font-heading font-bold mb-2">Certificate Issuance</h1>
           <p className="text-gray-400">Review, issue, and cryptographically verify student certificates.</p>
         </div>
-        <button className="flex items-center gap-2 px-4 py-2 bg-electric-blue text-navy-900 rounded-lg font-semibold hover:bg-electric-cyan transition-colors">
+        <button className="flex items-center gap-2 px-4 py-2 bg-electric-blue text-navy-900 rounded-lg font-medium hover:bg-electric-cyan transition-colors">
           <Upload size={16} /> Bulk Issue
         </button>
       </div>

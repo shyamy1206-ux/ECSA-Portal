@@ -86,7 +86,7 @@ function KanbanColumn({ title, count, items, colId, onMove, actionText, onReject
   return (
     <div className="glass rounded-2xl p-6 border border-white/5 flex flex-col h-[600px]">
       <div className="flex justify-between items-center mb-6 border-b border-white/10 pb-4">
-        <h3 className="font-semibold text-lg">{title}</h3>
+        <h3 className="font-medium text-lg">{title}</h3>
         <span className="bg-white/10 text-xs px-2.5 py-1 rounded-full">{count}</span>
       </div>
       
@@ -113,7 +113,7 @@ function KanbanColumn({ title, count, items, colId, onMove, actionText, onReject
               {onReject && item.id !== "s4" && (
                 <button 
                   onClick={() => onReject(item.id)}
-                  className="px-3 py-1.5 text-xs font-semibold text-gray-400 hover:text-red-400 transition-colors"
+                  className="px-3 py-1.5 text-xs font-medium text-gray-400 hover:text-red-400 transition-colors"
                 >
                   Remove
                 </button>
@@ -121,7 +121,7 @@ function KanbanColumn({ title, count, items, colId, onMove, actionText, onReject
               {onMove && (
                 <button 
                   onClick={() => onMove(item.id)}
-                  className="px-3 py-1.5 text-xs font-semibold bg-white/10 hover:bg-electric-blue hover:text-navy-900 rounded transition-colors text-white"
+                  className="px-3 py-1.5 text-xs font-medium bg-white/10 hover:bg-electric-blue hover:text-navy-900 rounded transition-colors text-white"
                 >
                   {actionText}
                 </button>

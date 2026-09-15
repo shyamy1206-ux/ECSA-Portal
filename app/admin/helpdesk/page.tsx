@@ -33,11 +33,11 @@ export default async function AdminHelpdeskPage() {
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-white/10 text-left">
-                <th className="px-6 py-4 text-xs text-gray-500 font-semibold uppercase tracking-wider">Request</th>
-                <th className="px-6 py-4 text-xs text-gray-500 font-semibold uppercase tracking-wider">Student</th>
-                <th className="px-6 py-4 text-xs text-gray-500 font-semibold uppercase tracking-wider">Category</th>
-                <th className="px-6 py-4 text-xs text-gray-500 font-semibold uppercase tracking-wider">Status</th>
-                <th className="px-6 py-4 text-xs text-gray-500 font-semibold uppercase tracking-wider">Date</th>
+                <th className="px-6 py-4 text-xs text-gray-500 font-medium uppercase tracking-wider">Request</th>
+                <th className="px-6 py-4 text-xs text-gray-500 font-medium uppercase tracking-wider">Student</th>
+                <th className="px-6 py-4 text-xs text-gray-500 font-medium uppercase tracking-wider">Category</th>
+                <th className="px-6 py-4 text-xs text-gray-500 font-medium uppercase tracking-wider">Status</th>
+                <th className="px-6 py-4 text-xs text-gray-500 font-medium uppercase tracking-wider">Date</th>
               </tr>
             </thead>
             <tbody>

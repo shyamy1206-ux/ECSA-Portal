@@ -15,8 +15,13 @@ const ScrollStoryContext = createContext<ScrollStoryContextType>({
 export function ScrollStoryProvider({ children }: { children: ReactNode }) {
   const [activeChapter, setActiveChapter] = useState("hero");
 
+  const value = React.useMemo(() => ({
+    activeChapter,
+    setActiveChapter
+  }), [activeChapter]);
+
   return (
-    <ScrollStoryContext.Provider value={{ activeChapter, setActiveChapter }}>
+    <ScrollStoryContext.Provider value={value}>
       {children}
     </ScrollStoryContext.Provider>
   );

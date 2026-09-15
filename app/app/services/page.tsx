@@ -57,19 +57,19 @@ export default async function CampusServicesPage({
       <div className="flex gap-4 mb-8 border-b border-white/10 pb-4 overflow-x-auto custom-scrollbar">
         <Link 
           href="?tab=helpdesk" 
-          className={`font-semibold whitespace-nowrap transition-colors ${tab === 'helpdesk' ? 'text-electric-cyan border-b-2 border-electric-cyan pb-4 -mb-[18px]' : 'text-gray-400 hover:text-white'}`}
+          className={`font-medium whitespace-nowrap transition-colors ${tab === 'helpdesk' ? 'text-electric-cyan border-b-2 border-electric-cyan pb-4 -mb-[18px]' : 'text-gray-400 hover:text-white'}`}
         >
           Helpdesk
         </Link>
         <Link 
           href="?tab=lost-found" 
-          className={`font-semibold whitespace-nowrap transition-colors ${tab === 'lost-found' ? 'text-electric-cyan border-b-2 border-electric-cyan pb-4 -mb-[18px]' : 'text-gray-400 hover:text-white'}`}
+          className={`font-medium whitespace-nowrap transition-colors ${tab === 'lost-found' ? 'text-electric-cyan border-b-2 border-electric-cyan pb-4 -mb-[18px]' : 'text-gray-400 hover:text-white'}`}
         >
           Lost & Found
         </Link>
         <Link 
           href="?tab=equipment" 
-          className={`font-semibold whitespace-nowrap transition-colors ${tab === 'equipment' ? 'text-electric-cyan border-b-2 border-electric-cyan pb-4 -mb-[18px]' : 'text-gray-400 hover:text-white'}`}
+          className={`font-medium whitespace-nowrap transition-colors ${tab === 'equipment' ? 'text-electric-cyan border-b-2 border-electric-cyan pb-4 -mb-[18px]' : 'text-gray-400 hover:text-white'}`}
         >
           Equipment & Lab Access
         </Link>

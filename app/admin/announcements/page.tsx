@@ -27,10 +27,10 @@ export default async function AdminAnnouncementsPage() {
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-white/10 text-left">
-                <th className="px-6 py-4 text-xs text-gray-500 font-semibold uppercase tracking-wider">Title</th>
-                <th className="px-6 py-4 text-xs text-gray-500 font-semibold uppercase tracking-wider">Priority</th>
-                <th className="px-6 py-4 text-xs text-gray-500 font-semibold uppercase tracking-wider">Status</th>
-                <th className="px-6 py-4 text-xs text-gray-500 font-semibold uppercase tracking-wider">Created</th>
+                <th className="px-6 py-4 text-xs text-gray-500 font-medium uppercase tracking-wider">Title</th>
+                <th className="px-6 py-4 text-xs text-gray-500 font-medium uppercase tracking-wider">Priority</th>
+                <th className="px-6 py-4 text-xs text-gray-500 font-medium uppercase tracking-wider">Status</th>
+                <th className="px-6 py-4 text-xs text-gray-500 font-medium uppercase tracking-wider">Created</th>
               </tr>
             </thead>
             <tbody>

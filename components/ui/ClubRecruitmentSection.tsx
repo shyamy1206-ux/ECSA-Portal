@@ -63,7 +63,7 @@ export default async function ClubRecruitmentSection({ clubId, clubSlug }: ClubR
             {activeDrive.roles.map((role: any) => (
               <div key={role.id} className="bg-black/40 border border-white/5 rounded-xl p-4">
                 <div className="flex justify-between items-start mb-2">
-                  <h5 className="font-semibold text-white text-sm">{role.title}</h5>
+                  <h5 className="font-medium text-white text-sm">{role.title}</h5>
                   {role.capacity && (
                     <span className="text-xs bg-white/10 px-2 py-1 rounded text-gray-400">
                       {role.capacity} spots

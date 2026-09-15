@@ -36,7 +36,7 @@ export default async function MentorshipNetwork() {
             />
           </div>
 
-          <h3 className="font-semibold text-sm text-gray-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+          <h3 className="font-medium text-sm text-gray-400 uppercase tracking-wider mb-4 flex items-center gap-2">
             <Filter size={14} /> Filters
           </h3>
 

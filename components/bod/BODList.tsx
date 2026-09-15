@@ -70,7 +70,7 @@ export default async function BODList() {
               <p className={`text-xs tracking-widest font-bold uppercase mb-2 ${isHighlight ? 'text-electric-cyan' : 'text-electric-blue'}`}>
                 {member.post}
               </p>
-              <h3 className="text-2xl font-semibold text-white mb-1">
+              <h3 className="text-2xl font-medium text-white mb-1">
                 {member.full_name}
               </h3>
               <p className="text-sm text-gray-400 mb-4">

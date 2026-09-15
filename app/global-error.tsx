@@ -20,7 +20,7 @@ export default function GlobalError({
         <p className="text-gray-400 mb-8">A fatal error has occurred.</p>
         <button
           onClick={() => reset()}
-          className="px-6 py-3 bg-white text-navy-900 font-semibold rounded-full"
+          className="px-6 py-3 bg-white text-navy-900 font-medium rounded-full"
         >
           Try again
         </button>

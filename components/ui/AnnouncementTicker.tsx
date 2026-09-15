@@ -89,7 +89,7 @@ export function AnnouncementTicker({ announcements }: { announcements: Announcem
               {displayItems.map((item) => (
                 <div key={item.id} className={`flex items-center gap-2 px-3 py-1.5 rounded-full border text-sm ${getPriorityStyle(item.priority)}`}>
                   {getPriorityIcon(item.priority)}
-                  <span className="font-semibold text-white whitespace-nowrap">{item.title}</span>
+                  <span className="font-medium text-white whitespace-nowrap">{item.title}</span>
                   {item.content && <span className="text-gray-400 hidden md:inline truncate max-w-xs">- {item.content}</span>}
                 </div>
               ))}
@@ -101,7 +101,7 @@ export function AnnouncementTicker({ announcements }: { announcements: Announcem
                 <div key={`${item.id}-${index}`} className={`flex items-center gap-3 px-4 py-2 rounded-full border text-sm transition-opacity hover:opacity-100 ${isHovered ? 'opacity-100' : 'opacity-80'} ${getPriorityStyle(item.priority)}`}>
                   {getPriorityIcon(item.priority)}
                   <div className="flex items-center gap-2">
-                    <span className="font-semibold text-white whitespace-nowrap">{item.title}</span>
+                    <span className="font-medium text-white whitespace-nowrap">{item.title}</span>
                     {item.content && <span className="text-gray-400 hidden md:inline whitespace-nowrap truncate max-w-sm">- {item.content}</span>}
                     <span className="text-xs text-gray-500 ml-2 whitespace-nowrap">{format(new Date(item.created_at), "MMM d")}</span>
                   </div>

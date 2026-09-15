@@ -53,10 +53,10 @@ export default async function ClubOnboardingPage() {
                     <td className="px-6 py-4 text-right">
                       {/* Action buttons appear on hover for clean UI */}
                       <div className="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <button className="px-3 py-1.5 text-xs font-semibold bg-green-500/20 text-green-400 hover:bg-green-500/30 rounded transition-colors">
+                        <button className="px-3 py-1.5 text-xs font-medium bg-green-500/20 text-green-400 hover:bg-green-500/30 rounded transition-colors">
                           Approve
                         </button>
-                        <button className="px-3 py-1.5 text-xs font-semibold bg-red-500/20 text-red-400 hover:bg-red-500/30 rounded transition-colors">
+                        <button className="px-3 py-1.5 text-xs font-medium bg-red-500/20 text-red-400 hover:bg-red-500/30 rounded transition-colors">
                           Reject
                         </button>
                       </div>

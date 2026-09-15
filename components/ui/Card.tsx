@@ -22,7 +22,7 @@ CardHeader.displayName = "CardHeader";
 
 export const CardTitle = forwardRef<HTMLHeadingElement, HTMLAttributes<HTMLHeadingElement>>(
   ({ className, ...props }, ref) => (
-    <h3 ref={ref} className={twMerge(clsx("font-semibold leading-none tracking-tight", className))} {...props} />
+    <h3 ref={ref} className={twMerge(clsx("font-medium leading-none tracking-tight", className))} {...props} />
   )
 );
 CardTitle.displayName = "CardTitle";

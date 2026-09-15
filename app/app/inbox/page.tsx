@@ -83,7 +83,7 @@ export default async function InboxPage() {
                   
                   <div className="flex items-center justify-between">
                     {notif.link ? (
-                      <Link href={notif.link} className="text-sm font-semibold text-electric-blue hover:text-electric-cyan transition-colors">
+                      <Link href={notif.link} className="text-sm font-medium text-electric-blue hover:text-electric-cyan transition-colors">
                         View details &rarr;
                       </Link>
                     ) : (

@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import React, { createContext, useContext, useEffect, useState, ReactNode, useMemo } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { SupabaseClient } from "@supabase/supabase-js";
 
@@ -36,8 +36,13 @@ export function RealtimeProvider({ children }: { children: ReactNode }) {
     };
   }, [supabase]);
 
+  const value = React.useMemo(() => ({
+    supabase,
+    isConnected
+  }), [supabase, isConnected]);
+
   return (
-    <RealtimeContext.Provider value={{ supabase, isConnected }}>
+    <RealtimeContext.Provider value={value}>
       {children}
     </RealtimeContext.Provider>
   );

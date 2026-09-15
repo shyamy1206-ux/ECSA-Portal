@@ -11,10 +11,10 @@ export default function Home() {
       
       {/* 1. HERO */}
       <ScrollStorySection id="hero" className="flex flex-col items-center justify-center text-center p-8">
-        <h1 className="text-5xl md:text-7xl font-heading font-black text-white tracking-tighter mb-4 drop-shadow-2xl">
+        <h1 className="text-5xl md:text-7xl font-heading font-bold text-white tracking-tighter mb-4 drop-shadow-2xl">
           ELECTRONICS & COMPUTER <br/><span className="text-electric-blue">ENGINEERING</span>
         </h1>
-        <p className="text-xl md:text-2xl text-gray-400 mb-8 max-w-2xl font-light">
+        <p className="text-xl md:text-2xl text-gray-400 mb-8 max-w-2xl font-normal">
           ENGINEERING THE INTELLIGENCE BEHIND TOMORROW.
         </p>
         <div className="flex gap-4 mt-8">
@@ -24,7 +24,7 @@ export default function Home() {
             </a>
           </MagneticButton>
           <MagneticButton>
-            <a href="/login" className="px-8 py-4 bg-electric-blue text-navy-900 font-semibold rounded-full hover:bg-electric-cyan transition-colors inline-block">
+            <a href="/login" className="px-8 py-4 bg-electric-blue text-navy-900 font-medium rounded-full hover:bg-electric-cyan transition-colors inline-block">
               Join ECSA
             </a>
           </MagneticButton>

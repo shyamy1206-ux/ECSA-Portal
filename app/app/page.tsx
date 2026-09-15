@@ -133,7 +133,7 @@ export default async function StudentDashboard({
             {recentNotifs && recentNotifs.length > 0 ? (
               recentNotifs.map(notif => (
                 <div key={notif.id} className="text-sm">
-                  <p className={`font-semibold ${notif.is_read ? 'text-gray-400' : 'text-white'}`}>{notif.title}</p>
+                  <p className={`font-medium ${notif.is_read ? 'text-gray-400' : 'text-white'}`}>{notif.title}</p>
                   <p className="text-gray-500 text-xs mt-1 line-clamp-2">{notif.message}</p>
                 </div>
               ))
@@ -156,25 +156,25 @@ export default async function StudentDashboard({
         <div className="flex flex-wrap gap-4 mb-8 border-b border-white/10 pb-4">
           <Link 
             href="?tab=events" 
-            className={`font-semibold transition-colors ${tab === 'events' ? 'text-electric-cyan border-b-2 border-electric-cyan pb-4 -mb-[18px]' : 'text-gray-400 hover:text-white'}`}
+            className={`font-medium transition-colors ${tab === 'events' ? 'text-electric-cyan border-b-2 border-electric-cyan pb-4 -mb-[18px]' : 'text-gray-400 hover:text-white'}`}
           >
             Registered Events
           </Link>
           <Link 
             href="?tab=clubs" 
-            className={`font-semibold transition-colors ${tab === 'clubs' ? 'text-electric-cyan border-b-2 border-electric-cyan pb-4 -mb-[18px]' : 'text-gray-400 hover:text-white'}`}
+            className={`font-medium transition-colors ${tab === 'clubs' ? 'text-electric-cyan border-b-2 border-electric-cyan pb-4 -mb-[18px]' : 'text-gray-400 hover:text-white'}`}
           >
             My Clubs
           </Link>
           <Link 
             href="?tab=certificates" 
-            className={`font-semibold transition-colors ${tab === 'certificates' ? 'text-electric-cyan border-b-2 border-electric-cyan pb-4 -mb-[18px]' : 'text-gray-400 hover:text-white'}`}
+            className={`font-medium transition-colors ${tab === 'certificates' ? 'text-electric-cyan border-b-2 border-electric-cyan pb-4 -mb-[18px]' : 'text-gray-400 hover:text-white'}`}
           >
             Certificates
           </Link>
           <Link 
             href="?tab=applications" 
-            className={`font-semibold transition-colors ${tab === 'applications' ? 'text-electric-cyan border-b-2 border-electric-cyan pb-4 -mb-[18px]' : 'text-gray-400 hover:text-white'}`}
+            className={`font-medium transition-colors ${tab === 'applications' ? 'text-electric-cyan border-b-2 border-electric-cyan pb-4 -mb-[18px]' : 'text-gray-400 hover:text-white'}`}
           >
             Applications
           </Link>
@@ -203,7 +203,7 @@ export default async function StudentDashboard({
                 title="No events registered." 
                 description="You haven't registered for any events yet. Check out the events page to find something interesting!" 
                 icon={<Calendar size={32} />} 
-                action={<Link href="/events" className="px-6 py-2 bg-white/10 text-white rounded-lg text-sm font-semibold hover:bg-white/20 transition-colors">Browse Events</Link>}
+                action={<Link href="/events" className="px-6 py-2 bg-white/10 text-white rounded-lg text-sm font-medium hover:bg-white/20 transition-colors">Browse Events</Link>}
               />
             )
           )}
@@ -217,7 +217,7 @@ export default async function StudentDashboard({
                     <h3 className="font-bold text-white mb-1">{membership.clubs?.name || 'Unknown Club'}</h3>
                     <p className="text-sm text-gray-400">Role: <span className="text-electric-cyan capitalize font-medium">{membership.role}</span></p>
                   </div>
-                  <Link href={`/clubs/${membership.clubs?.slug}`} className="text-sm font-semibold hover:text-white text-gray-400 transition-colors">
+                  <Link href={`/clubs/${membership.clubs?.slug}`} className="text-sm font-medium hover:text-white text-gray-400 transition-colors">
                     View Club &rarr;
                   </Link>
                 </div>
@@ -227,7 +227,7 @@ export default async function StudentDashboard({
                 title="No club memberships." 
                 description="You aren't a member of any clubs. Visit the clubs directory to join one!" 
                 icon={<Users size={32} />} 
-                action={<Link href="/clubs" className="px-6 py-2 bg-white/10 text-white rounded-lg text-sm font-semibold hover:bg-white/20 transition-colors">Browse Clubs</Link>}
+                action={<Link href="/clubs" className="px-6 py-2 bg-white/10 text-white rounded-lg text-sm font-medium hover:bg-white/20 transition-colors">Browse Clubs</Link>}
               />
             )
           )}
@@ -241,7 +241,7 @@ export default async function StudentDashboard({
                     <h3 className="font-bold text-white mb-1">{cert.events?.title || 'Certificate'}</h3>
                     <p className="text-sm text-gray-400">Hash: <span className="font-mono text-xs text-white/50">{cert.verification_hash}</span></p>
                   </div>
-                  <a href={cert.file_url} target="_blank" rel="noreferrer" className="text-sm font-semibold text-electric-blue hover:text-electric-cyan transition-colors">
+                  <a href={cert.file_url} target="_blank" rel="noreferrer" className="text-sm font-medium text-electric-blue hover:text-electric-cyan transition-colors">
                     View Document
                   </a>
                 </div>
@@ -283,7 +283,7 @@ export default async function StudentDashboard({
                 title="No active applications." 
                 description="You haven't submitted any club recruitment applications recently." 
                 icon={<FileText size={32} />} 
-                action={<Link href="/clubs" className="px-6 py-2 bg-white/10 text-white rounded-lg text-sm font-semibold hover:bg-white/20 transition-colors">Find Roles</Link>}
+                action={<Link href="/clubs" className="px-6 py-2 bg-white/10 text-white rounded-lg text-sm font-medium hover:bg-white/20 transition-colors">Find Roles</Link>}
               />
             )
           )}

@@ -33,10 +33,10 @@ export default async function AdminUsersPage() {
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-white/10 text-left">
-                <th className="px-6 py-4 text-xs text-gray-500 font-semibold uppercase tracking-wider">User</th>
-                <th className="px-6 py-4 text-xs text-gray-500 font-semibold uppercase tracking-wider">Department</th>
-                <th className="px-6 py-4 text-xs text-gray-500 font-semibold uppercase tracking-wider">Roles</th>
-                <th className="px-6 py-4 text-xs text-gray-500 font-semibold uppercase tracking-wider">Joined</th>
+                <th className="px-6 py-4 text-xs text-gray-500 font-medium uppercase tracking-wider">User</th>
+                <th className="px-6 py-4 text-xs text-gray-500 font-medium uppercase tracking-wider">Department</th>
+                <th className="px-6 py-4 text-xs text-gray-500 font-medium uppercase tracking-wider">Roles</th>
+                <th className="px-6 py-4 text-xs text-gray-500 font-medium uppercase tracking-wider">Joined</th>
               </tr>
             </thead>
             <tbody>

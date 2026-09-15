@@ -62,13 +62,17 @@ export function GalleryUploader({ eventId }: { eventId: string }) {
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
     const droppedFiles = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith("image/"));
-    setFiles((prev) => [...prev, ...droppedFiles]);
+    if (droppedFiles.length > 0) {
+      handleUpload(droppedFiles);
+    }
   };
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const selectedFiles = Array.from(e.target.files).filter(f => f.type.startsWith("image/"));
-      setFiles((prev) => [...prev, ...selectedFiles]);
+      if (selectedFiles.length > 0) {
+        handleUpload(selectedFiles);
+      }
     }
   };
 
@@ -76,9 +80,10 @@ export function GalleryUploader({ eventId }: { eventId: string }) {
     setFiles((prev) => prev.filter((_, i) => i !== index));
   };
 
-  const handleUpload = async () => {
-    if (files.length === 0) return;
+  const handleUpload = async (newFiles: File[]) => {
+    if (newFiles.length === 0) return;
     
+    setFiles((prev) => [...prev, ...newFiles]);
     setIsUploading(true);
     setStatus("uploading");
     setUploadProgress(0);
@@ -105,8 +110,8 @@ export function GalleryUploader({ eventId }: { eventId: string }) {
       }
 
       // 2. Upload images
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i];
+      for (let i = 0; i < newFiles.length; i++) {
+        const file = newFiles[i];
         
         // Compress
         const compressedBlob = await compressImage(file);
@@ -139,11 +144,10 @@ export function GalleryUploader({ eventId }: { eventId: string }) {
 
         if (dbErr) throw dbErr;
 
-        setUploadProgress(Math.round(((i + 1) / files.length) * 100));
+        setUploadProgress(Math.round(((i + 1) / newFiles.length) * 100));
       }
 
       setStatus("success");
-      setFiles([]);
     } catch (err: any) {
       console.error(err);
       setStatus("error");
@@ -178,7 +182,7 @@ export function GalleryUploader({ eventId }: { eventId: string }) {
 
       {files.length > 0 && (
         <div className="space-y-4">
-          <h4 className="font-semibold text-white">Selected Files ({files.length})</h4>
+          <h4 className="font-medium text-white">Selected Files ({files.length})</h4>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {files.map((file, idx) => (
               <div key={idx} className="relative group rounded-xl overflow-hidden bg-black/40 border border-white/10 aspect-video flex items-center justify-center">
@@ -194,22 +198,23 @@ export function GalleryUploader({ eventId }: { eventId: string }) {
             ))}
           </div>
 
-          <div className="flex items-center gap-4 pt-4 border-t border-white/10">
-            <button 
-              onClick={handleUpload}
-              disabled={isUploading}
-              className="px-6 py-2 bg-electric-blue text-navy-900 font-bold rounded-lg hover:bg-electric-cyan transition-colors disabled:opacity-50"
-            >
-              {isUploading ? `Uploading... ${uploadProgress}%` : 'Upload and Compress'}
-            </button>
-            <button 
-              onClick={() => setFiles([])}
-              disabled={isUploading}
-              className="px-6 py-2 border border-white/20 text-white font-medium rounded-lg hover:bg-white/10 transition-colors disabled:opacity-50"
-            >
-              Clear All
-            </button>
-          </div>
+            <div className="flex items-center justify-between pt-4 border-t border-white/10">
+              {isUploading ? (
+                <div className="flex items-center gap-2 text-electric-blue font-bold">
+                  <span className="w-4 h-4 border-2 border-electric-blue border-t-transparent rounded-full animate-spin"></span>
+                  <span>Uploading... {uploadProgress}%</span>
+                </div>
+              ) : (
+                <div className="text-gray-400 text-sm">Upload complete.</div>
+              )}
+              <button 
+                onClick={() => setFiles([])}
+                disabled={isUploading}
+                className="px-6 py-2 border border-white/20 text-white font-medium rounded-lg hover:bg-white/10 transition-colors disabled:opacity-50"
+              >
+                Clear
+              </button>
+            </div>
         </div>
       )}
 

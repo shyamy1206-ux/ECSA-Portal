@@ -55,7 +55,7 @@ export default async function TrendingSection() {
           return (
             <Link href={item._href} key={item.id} className="block group">
               <div className="glass p-8 rounded-3xl border border-white/5 hover:border-electric-magenta/50 transition-all h-full flex flex-col relative overflow-hidden">
-                <div className={`absolute top-4 right-4 text-6xl font-heading font-black opacity-10 ${rankColor}`}>
+                <div className={`absolute top-4 right-4 text-6xl font-heading font-bold opacity-10 ${rankColor}`}>
                   #{idx + 1}
                 </div>
                 
@@ -77,7 +77,7 @@ export default async function TrendingSection() {
                   </p>
                 )}
                 
-                <div className="mt-6 flex items-center gap-1 text-electric-magenta font-semibold text-sm opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
+                <div className="mt-6 flex items-center gap-1 text-electric-magenta font-medium text-sm opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
                   View Details <ChevronRight size={16} />
                 </div>
               </div>

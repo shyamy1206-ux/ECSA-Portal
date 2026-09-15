@@ -84,7 +84,7 @@ export default async function EventsPage() {
                   <MagneticButton>
                     <Link 
                       href={`/events/${event.id}`}
-                      className={`px-8 py-3 rounded-full font-semibold transition-colors flex items-center justify-center text-center
+                      className={`px-8 py-3 rounded-full font-medium transition-colors flex items-center justify-center text-center
                         ${isFull 
                           ? 'bg-white/5 text-gray-500 cursor-not-allowed pointer-events-none' 
                           : 'bg-electric-blue text-navy-900 hover:bg-electric-cyan'}`

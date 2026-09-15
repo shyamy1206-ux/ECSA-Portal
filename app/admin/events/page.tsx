@@ -24,11 +24,11 @@ export default async function AdminEventsPage() {
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-white/10 text-left">
-                <th className="px-6 py-4 text-xs text-gray-500 font-semibold uppercase tracking-wider">Event</th>
-                <th className="px-6 py-4 text-xs text-gray-500 font-semibold uppercase tracking-wider">Club</th>
-                <th className="px-6 py-4 text-xs text-gray-500 font-semibold uppercase tracking-wider">Date</th>
-                <th className="px-6 py-4 text-xs text-gray-500 font-semibold uppercase tracking-wider">Capacity</th>
-                <th className="px-6 py-4 text-xs text-gray-500 font-semibold uppercase tracking-wider">Status</th>
+                <th className="px-6 py-4 text-xs text-gray-500 font-medium uppercase tracking-wider">Event</th>
+                <th className="px-6 py-4 text-xs text-gray-500 font-medium uppercase tracking-wider">Club</th>
+                <th className="px-6 py-4 text-xs text-gray-500 font-medium uppercase tracking-wider">Date</th>
+                <th className="px-6 py-4 text-xs text-gray-500 font-medium uppercase tracking-wider">Capacity</th>
+                <th className="px-6 py-4 text-xs text-gray-500 font-medium uppercase tracking-wider">Status</th>
               </tr>
             </thead>
             <tbody>

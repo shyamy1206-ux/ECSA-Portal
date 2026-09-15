@@ -48,7 +48,7 @@ export default function IdeaSubmissionForm({ submitIdea }: { submitIdea: (formDa
         <button 
           type="submit" 
           disabled={loading}
-          className="w-full mt-2 px-6 py-3 bg-electric-blue text-navy-900 font-semibold rounded-xl hover:bg-electric-cyan transition-colors disabled:opacity-50"
+          className="w-full mt-2 px-6 py-3 bg-electric-blue text-navy-900 font-medium rounded-xl hover:bg-electric-cyan transition-colors disabled:opacity-50"
         >
           {loading ? 'Submitting...' : 'Submit to ECSA Board'}
         </button>
