@@ -73,6 +73,7 @@ export async function updateSession(request: NextRequest) {
     (request.nextUrl.pathname.startsWith('/app') || request.nextUrl.pathname.startsWith('/admin'))
   ) {
     const url = request.nextUrl.clone()
+    url.searchParams.set('next', request.nextUrl.pathname)
     url.pathname = '/login'
     return NextResponse.redirect(url)
   }

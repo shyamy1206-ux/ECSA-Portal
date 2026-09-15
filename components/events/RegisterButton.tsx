@@ -48,7 +48,7 @@ export function RegisterButton({ eventId, isPast, isFull }: { eventId: string, i
   if (registered) {
     return (
       <div className="w-full py-4 rounded-xl font-bold text-center bg-green-500/20 text-green-400 border border-green-500/30">
-        You're Registered!
+        You&apos;re Registered!
       </div>
     );
   }

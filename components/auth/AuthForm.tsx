@@ -4,26 +4,37 @@ import { Auth } from '@supabase/auth-ui-react';
 import { ThemeSupa } from '@supabase/auth-ui-shared';
 import { createClient } from '@/lib/supabase/client';
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 export default function AuthForm() {
   const supabase = createClient();
   const [origin, setOrigin] = useState('');
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const next = searchParams.get('next');
 
   useEffect(() => {
     setOrigin(window.location.origin);
     
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (event === 'SIGNED_IN' && session) {
-        // Just refresh the page and go to the home page instead of forcing them into the dashboard
-        router.push('/');
+        if (next) {
+          router.push(next);
+        } else {
+          // Check role on client side to route correctly for email logins
+          const { data } = await supabase.from('user_roles').select('role').eq('user_id', session.user.id).maybeSingle();
+          if (data?.role === 'super_admin' || data?.role === 'ecsa_admin') {
+            router.push('/admin');
+          } else {
+            router.push('/app');
+          }
+        }
         router.refresh();
       }
     });
 
     return () => subscription.unsubscribe();
-  }, [supabase.auth, router]);
+  }, [supabase, router, next]);
 
   if (!origin) return null; // Avoid hydration mismatch
 
@@ -65,7 +76,7 @@ export default function AuthForm() {
         theme="dark"
         showLinks={true}
         providers={['google']}
-        redirectTo={`${origin}/auth/callback`}
+        redirectTo={`${origin}/auth/callback${next ? `?next=${encodeURIComponent(next)}` : ''}`}
       />
     </div>
   );

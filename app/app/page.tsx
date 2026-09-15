@@ -29,17 +29,15 @@ export default async function StudentDashboard({
 
   // Check if this user is a BOD member by matching their exact name
   let bodRole = null;
-  if (profile?.full_name) {
-    const { data: bodMatch } = await supabase
-      .from('bod_members')
-      .select('post')
-      .ilike('full_name', profile.full_name)
-      .eq('is_active', true)
-      .maybeSingle();
-    
-    if (bodMatch) {
-      bodRole = bodMatch.post;
-    }
+  const { data: bodMatch } = await supabase
+    .from('bod_members')
+    .select('post')
+    .eq('user_id', user.id)
+    .eq('is_active', true)
+    .maybeSingle();
+  
+  if (bodMatch) {
+    bodRole = bodMatch.post;
   }
 
   // Fetch data for tabs
