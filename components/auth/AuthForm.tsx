@@ -16,7 +16,8 @@ export default function AuthForm() {
     
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === 'SIGNED_IN' && session) {
-        router.replace('/app');
+        // Just refresh the page and go to the home page instead of forcing them into the dashboard
+        router.push('/');
         router.refresh();
       }
     });
