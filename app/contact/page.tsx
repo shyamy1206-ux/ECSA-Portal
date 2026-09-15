@@ -1,5 +1,5 @@
 import { Mail, MapPin } from "lucide-react";
-import MagneticButton from "@/components/ui/MagneticButton";
+import ContactForm from "./ContactForm";
 
 export default function ContactPage() {
   return (
@@ -43,31 +43,7 @@ export default function ContactPage() {
         {/* Contact Form */}
         <div className="glass p-8 md:p-10 rounded-3xl border border-white/10">
           <h2 className="text-2xl font-bold text-white mb-6">Send a Message</h2>
-          <form className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-400">Your Name</label>
-                <input type="text" className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-electric-blue transition-colors" placeholder="John Doe" />
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-400">Email Address</label>
-                <input type="email" className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-electric-blue transition-colors" placeholder="john@example.com" />
-              </div>
-            </div>
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-400">Subject</label>
-              <input type="text" className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-electric-blue transition-colors" placeholder="How can we help?" />
-            </div>
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-400">Message</label>
-              <textarea rows={4} className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-electric-blue transition-colors resize-none" placeholder="Your message here..."></textarea>
-            </div>
-            <MagneticButton>
-              <button type="button" className="w-full py-4 bg-white text-navy-900 font-bold rounded-xl hover:bg-electric-blue transition-colors">
-                Send Message
-              </button>
-            </MagneticButton>
-          </form>
+          <ContactForm />
         </div>
       </div>
     </div>
