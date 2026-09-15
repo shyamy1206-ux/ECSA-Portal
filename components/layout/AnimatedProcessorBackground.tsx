@@ -60,8 +60,8 @@ export default function AnimatedProcessorBackground() {
           />
         )}
       </motion.div>
-      <div className="fixed inset-0 z-[1] pointer-events-none bg-[#050816]/65" />
-      <div className="fixed inset-0 z-[2] pointer-events-none bg-gradient-to-b from-[#050816]/80 via-transparent to-[#050816]/95" />
+      <div className="fixed inset-0 z-[1] pointer-events-none bg-navy-900/65" />
+      <div className="fixed inset-0 z-[2] pointer-events-none bg-gradient-to-b from-navy-900/80 via-transparent to-navy-900/95" />
     </>
   );
 }

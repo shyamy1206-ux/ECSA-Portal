@@ -21,12 +21,15 @@ export default async function StudentAppLayout({
   const user = session.user;
 
   return (
-    <div className="min-h-screen bg-[#05070A] flex flex-col md:flex-row pt-20">
+    <div className="min-h-screen bg-navy-900/80 flex flex-col md:flex-row pt-20">
       {/* Sidebar / Navigation */}
-      <aside className="w-full md:w-64 shrink-0 border-r border-white/10 p-6 flex flex-col gap-6 relative z-10 bg-[#05070A]/80 backdrop-blur-xl">
+      <aside className="w-full md:w-64 shrink-0 border-r border-white/10 p-6 flex flex-col gap-6 relative z-10 bg-navy-900/90 backdrop-blur-xl">
         <div className="mb-4">
-          <h2 className="text-xl font-heading font-bold text-white tracking-wider">ECSA PASSPORT</h2>
-          <p className="text-xs text-electric-cyan font-mono mt-1 mb-6">ID: {session.user.id.substring(0,8).toUpperCase()}</p>
+          <Link href="/" className="text-xl font-heading font-bold flex items-center gap-2 mb-2">
+            <span className="text-electric-blue">ECSA</span>
+            <span className="text-gray-500 font-light hidden sm:inline">| NMIET</span>
+          </Link>
+          <p className="text-xs text-electric-cyan font-mono mt-1 mb-6">Passport ID: {session.user.id.substring(0,8).toUpperCase()}</p>
           <GlobalSearch />
         </div>
 

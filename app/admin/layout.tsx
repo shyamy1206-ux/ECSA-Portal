@@ -53,8 +53,10 @@ export default async function AdminLayout({
     <div className="min-h-screen flex bg-navy-900/80">
       <aside className="w-64 glass border-r border-white/10 hidden md:flex flex-col fixed h-screen z-20">
         <div className="p-6">
-          <Link href="/admin" className="text-xl font-heading font-bold text-electric-blue flex items-center gap-2">
-            <ShieldIcon /> ECSA Admin
+          <Link href="/" className="text-xl font-heading font-bold flex items-center gap-2">
+            <span className="text-electric-blue">ECSA</span>
+            <span className="text-gray-500 font-light hidden sm:inline">| NMIET</span>
+            <span className="text-xs text-electric-cyan px-2 py-0.5 rounded bg-electric-blue/10 border border-electric-blue/20 ml-2">Admin</span>
           </Link>
         </div>
         

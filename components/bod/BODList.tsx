@@ -1,5 +1,7 @@
 import Image from "next/image";
 import { createClient } from "@/lib/supabase/server";
+import { EmptyState } from "@/components/ui/EmptyState";
+import { Users } from "lucide-react";
 
 export interface BODMember {
   id?: string;
@@ -12,13 +14,6 @@ export interface BODMember {
   is_active?: boolean;
   highlight?: boolean;
 }
-
-const FALLBACK_BOD_MEMBERS: BODMember[] = [
-  { post: "PRESIDENT", full_name: "Priyanshu Prasad", session: "EST 2026-27", responsibility: "Leads the association", display_order: 1 },
-  { post: "VICE PRESIDENT", full_name: "Tanushree Jadhav", session: "EST 2026-27", responsibility: "Assists the President", display_order: 2 },
-  { post: "SECRETARY", full_name: "Ojas Sulakhe", session: "EST 2026-27", responsibility: "Manages administration", display_order: 3 },
-  { post: "JOINT SECRETARY", full_name: "Vrushabh Yeole", session: "EST 2026-27", responsibility: "Assists the Secretary", display_order: 4, highlight: true },
-];
 
 export default async function BODList() {
   const supabase = createClient();
@@ -38,17 +33,22 @@ export default async function BODList() {
     // Graceful fallback if no DB connection
   }
 
-  // Use fallback if no members found
-  if (!members || members.length === 0) {
-    members = FALLBACK_BOD_MEMBERS;
-  }
-
   // Helper to get public URL for images
   const getImageUrl = (path: string | null | undefined) => {
     if (!path) return null;
     const { data } = supabase.storage.from('bod-photos').getPublicUrl(path);
     return data.publicUrl;
   };
+
+  if (!members || members.length === 0) {
+    return (
+      <EmptyState 
+        title="No board members yet." 
+        description="The ECSA Board of Directors will be announced soon." 
+        icon={<Users size={32} />} 
+      />
+    );
+  }
 
   return (
     <div className="mx-auto flex w-full max-w-4xl flex-col gap-6 relative z-10 pb-20">
