@@ -1,5 +1,5 @@
 import { HelpCircle } from "lucide-react";
-import MagneticButton from "@/components/ui/MagneticButton";
+import { ReportItemButton } from "@/components/lost-and-found/ReportItemButton";
 import Link from "next/link";
 
 export default function LostAndFoundPage() {
@@ -12,11 +12,7 @@ export default function LostAndFoundPage() {
             Report lost items or help return found items to their rightful owners on campus.
           </p>
         </div>
-        <MagneticButton>
-          <Link href="/app/helpdesk" className="px-6 py-3 bg-electric-blue text-navy-900 font-bold rounded-full hover:bg-electric-cyan transition-colors whitespace-nowrap">
-            Report an Item
-          </Link>
-        </MagneticButton>
+        <ReportItemButton />
       </div>
 
       <div className="glass p-16 rounded-3xl border border-white/5 text-center flex flex-col items-center justify-center">

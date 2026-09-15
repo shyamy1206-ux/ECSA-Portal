@@ -1,23 +1,39 @@
 "use client";
 
 import { useState } from "react";
-import { ShieldCheck, Search, XCircle } from "lucide-react";
+import { ShieldCheck, Search, XCircle, CheckCircle } from "lucide-react";
 import MagneticButton from "@/components/ui/MagneticButton";
+import { createClient } from "@/lib/supabase/client";
 
 export default function CertificateVerification() {
+  const supabase = createClient();
   const [certId, setCertId] = useState("");
   const [status, setStatus] = useState<'idle' | 'loading' | 'found' | 'error'>('idle');
+  const [certData, setCertData] = useState<any>(null);
 
-  const handleVerify = (e: React.FormEvent) => {
+  const handleVerify = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!certId.trim()) return;
     
     setStatus('loading');
     
-    // Simulate Supabase fetch
-    setTimeout(() => {
-      setStatus('error'); // By default, since we don't have real certs generated yet
-    }, 1500);
+    try {
+      const { data, error } = await supabase
+        .from('certificates')
+        .select('*, events(title), profiles(full_name)')
+        .eq('verification_hash', certId.trim())
+        .maybeSingle();
+
+      if (error || !data) {
+        setStatus('error');
+        setCertData(null);
+      } else {
+        setStatus('found');
+        setCertData(data);
+      }
+    } catch (err) {
+      setStatus('error');
+    }
   };
 
   return (
@@ -65,6 +81,29 @@ export default function CertificateVerification() {
           <div>
             <h3 className="text-red-400 font-bold mb-1">Certificate Not Found</h3>
             <p className="text-sm text-gray-400">We couldn&apos;t find a certificate matching that ID in our secure database. Please check the ID and try again.</p>
+          </div>
+        </div>
+      )}
+
+      {status === 'found' && certData && (
+        <div className="mt-8 glass p-8 rounded-2xl border border-green-500/30 bg-green-500/5 flex flex-col items-center gap-4 max-w-md w-full animate-fade-in text-center">
+          <CheckCircle className="text-green-400" size={48} />
+          <div>
+            <h3 className="text-green-400 font-bold text-xl mb-4">Verified Authentic</h3>
+            <div className="space-y-3 text-left bg-black/40 p-6 rounded-xl border border-white/5">
+              <div>
+                <span className="block text-xs text-gray-500 uppercase tracking-wider">Recipient</span>
+                <span className="font-bold text-white text-lg">{certData.profiles?.full_name || 'Unknown'}</span>
+              </div>
+              <div>
+                <span className="block text-xs text-gray-500 uppercase tracking-wider">Event / Achievement</span>
+                <span className="text-gray-300">{certData.events?.title || certData.type}</span>
+              </div>
+              <div>
+                <span className="block text-xs text-gray-500 uppercase tracking-wider">Issue Date</span>
+                <span className="text-gray-300">{new Date(certData.issue_date).toLocaleDateString()}</span>
+              </div>
+            </div>
           </div>
         </div>
       )}
