@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
-import LenisProvider from "@/components/layout/LenisProvider";
 import dynamic from "next/dynamic";
 import CustomCursor from "@/components/ui/CustomCursor";
 import Navbar from "@/components/layout/Navbar";
@@ -30,17 +29,15 @@ export default function RootLayout({
       <body className={`${inter.variable} ${spaceGrotesk.variable} font-sans antialiased bg-navy-900 text-white overflow-x-hidden flex flex-col min-h-screen`}>
         <RealtimeProvider>
           <ToastProvider>
-            <LenisProvider>
-              <ScrollStoryProvider>
-                <CustomCursor />
-                <AnimatedProcessorBackground />
-                <Navbar />
-                <main className="relative z-10 flex-grow flex flex-col">
-                  {children}
-                </main>
-                <Footer />
-              </ScrollStoryProvider>
-            </LenisProvider>
+            <ScrollStoryProvider>
+              <CustomCursor />
+              <AnimatedProcessorBackground />
+              <Navbar />
+              <main className="relative z-10 flex-grow flex flex-col">
+                {children}
+              </main>
+              <Footer />
+            </ScrollStoryProvider>
           </ToastProvider>
         </RealtimeProvider>
       </body>

@@ -1,6 +1,7 @@
 import MagneticButton from "@/components/ui/MagneticButton";
 import CampusAnnouncements from "@/components/ui/CampusAnnouncements";
 import TrendingSection from "@/components/ui/TrendingSection";
+import BODList from "@/components/bod/BODList";
 
 import { ScrollStorySection } from "@/components/scroll-story/ScrollStorySection";
 
@@ -77,6 +78,16 @@ export default function Home() {
         </h2>
         <div className="w-full max-w-7xl">
           <CampusAnnouncements />
+        </div>
+      </ScrollStorySection>
+
+      {/* 5.5 ECSA BOD */}
+      <ScrollStorySection id="bod" className="flex flex-col items-center justify-center p-8 bg-black/40 backdrop-blur-sm border-t border-white/10">
+        <h2 className="text-4xl md:text-6xl font-heading font-bold mb-12 tracking-widest text-white text-center">
+          MEET THE <span className="text-electric-cyan">BOARD</span>
+        </h2>
+        <div className="w-full max-w-7xl">
+          <BODList />
         </div>
       </ScrollStorySection>
 
