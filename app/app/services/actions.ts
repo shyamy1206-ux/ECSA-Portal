@@ -51,26 +51,27 @@ export async function submitLostAndFound(formData: FormData) {
     return { error: "You must be logged in." };
   }
 
-  const type = formData.get("type") as string; // 'lost' or 'found'
+  const item_type = formData.get("type") as string; // 'lost' or 'found'
   const title = formData.get("title") as string;
   const description = formData.get("description") as string;
   const location = formData.get("location") as string;
   const date_found_lost = formData.get("date") as string;
 
-  if (!title || !description || !type || !location || !date_found_lost) {
+  if (!title || !description || !item_type || !location || !date_found_lost) {
     return { error: "Missing required fields." };
   }
 
   const { error } = await supabase
-    .from("lost_and_found")
+    .from("lost_found_items")
     .insert({
       reported_by: session.user.id,
-      type,
+      item_type,
       title,
       description,
       location,
       date_found_lost: new Date(date_found_lost).toISOString(),
-      status: "open"
+      status: "pending",
+      category: "other"
     });
 
   if (error) {

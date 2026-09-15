@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { Package } from "lucide-react";
 import { EmptyState } from "@/components/ui/EmptyState";
+import { StatusUpdater } from "@/components/admin/StatusUpdater";
 
 export default async function AdminLostFoundPage() {
   const supabase = createClient();
@@ -38,17 +39,24 @@ export default async function AdminLostFoundPage() {
                     <td className="px-6 py-4 font-medium text-white">{item.title || item.description?.substring(0, 40)}</td>
                     <td className="px-6 py-4">
                       <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase ${
-                        item.type === 'lost' ? 'bg-red-500/20 text-red-400' : 'bg-green-500/20 text-green-400'
-                      }`}>{item.type}</span>
+                        item.item_type === 'lost' ? 'bg-red-500/20 text-red-400' : 'bg-green-500/20 text-green-400'
+                      }`}>{item.item_type}</span>
                     </td>
                     <td className="px-6 py-4 text-gray-400">{item.profiles?.full_name || 'Unknown'}</td>
                     <td className="px-6 py-4 text-gray-400 text-xs">{item.location || '—'}</td>
                     <td className="px-6 py-4">
-                      <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase ${
-                        item.status === 'returned' ? 'bg-green-500/20 text-green-400' :
-                        item.status === 'claimed' ? 'bg-electric-blue/20 text-electric-blue' :
-                        'bg-yellow-500/20 text-yellow-400'
-                      }`}>{item.status || 'active'}</span>
+                      <StatusUpdater 
+                        id={item.id} 
+                        table="lost_found_items" 
+                        currentStatus={item.status} 
+                        options={[
+                          { label: 'Pending', value: 'pending' },
+                          { label: 'Active', value: 'active' },
+                          { label: 'Claimed', value: 'claimed' },
+                          { label: 'Returned', value: 'returned' },
+                          { label: 'Closed', value: 'closed' }
+                        ]}
+                      />
                     </td>
                     <td className="px-6 py-4 text-gray-500 text-xs">{new Date(item.created_at).toLocaleDateString()}</td>
                   </tr>

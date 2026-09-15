@@ -33,7 +33,7 @@ export default async function CampusServicesPage({
     serviceRequests = data || [];
   } else if (tab === 'lost-found') {
     const { data } = await supabase
-      .from('lost_and_found')
+      .from('lost_found_items')
       .select('*')
       .eq('reported_by', session.user.id)
       .order('created_at', { ascending: false });
@@ -130,9 +130,9 @@ export default async function CampusServicesPage({
                     <div>
                       <div className="flex items-center gap-2 mb-1">
                         <span className={`px-2 py-0.5 rounded text-xs font-bold uppercase tracking-wider ${
-                          item.type === 'lost' ? 'bg-red-500/20 text-red-400' : 'bg-green-500/20 text-green-400'
+                          item.item_type === 'lost' ? 'bg-red-500/20 text-red-400' : 'bg-green-500/20 text-green-400'
                         }`}>
-                          {item.type}
+                          {item.item_type}
                         </span>
                         <h4 className="font-bold text-white text-lg">{item.title}</h4>
                       </div>

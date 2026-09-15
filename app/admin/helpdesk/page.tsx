@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { HelpCircle } from "lucide-react";
 import { EmptyState } from "@/components/ui/EmptyState";
+import { StatusUpdater } from "@/components/admin/StatusUpdater";
 
 export default async function AdminHelpdeskPage() {
   const supabase = createClient();
@@ -49,9 +50,17 @@ export default async function AdminHelpdeskPage() {
                     <td className="px-6 py-4 text-gray-400">{req.profiles?.full_name || 'Unknown'}</td>
                     <td className="px-6 py-4 text-gray-400 text-xs">{req.category || '—'}</td>
                     <td className="px-6 py-4">
-                      <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${statusColor(req.status)}`}>
-                        {req.status?.replace(/_/g, ' ')}
-                      </span>
+                      <StatusUpdater 
+                        id={req.id} 
+                        table="service_requests" 
+                        currentStatus={req.status} 
+                        options={[
+                          { label: 'Pending', value: 'pending' },
+                          { label: 'In Progress', value: 'in_progress' },
+                          { label: 'Resolved', value: 'resolved' },
+                          { label: 'Closed', value: 'closed' }
+                        ]}
+                      />
                     </td>
                     <td className="px-6 py-4 text-gray-500 text-xs">{new Date(req.created_at).toLocaleDateString()}</td>
                   </tr>

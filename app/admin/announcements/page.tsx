@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { Megaphone } from "lucide-react";
 import { EmptyState } from "@/components/ui/EmptyState";
+import { NewAnnouncementButton } from "@/components/admin/NewAnnouncementButton";
 
 export default async function AdminAnnouncementsPage() {
   const supabase = createClient();
@@ -13,9 +14,12 @@ export default async function AdminAnnouncementsPage() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-8">
-      <div>
-        <h1 className="text-3xl font-heading font-bold mb-2">Announcements</h1>
-        <p className="text-gray-400">Manage campus-wide announcements and ticker content.</p>
+      <div className="flex justify-between items-end">
+        <div>
+          <h1 className="text-3xl font-heading font-bold mb-2">Announcements</h1>
+          <p className="text-gray-400">Manage campus-wide announcements and ticker content.</p>
+        </div>
+        <NewAnnouncementButton />
       </div>
 
       <div className="glass rounded-2xl border border-white/5 overflow-hidden">
