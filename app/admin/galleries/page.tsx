@@ -6,7 +6,7 @@ export default async function EventGalleryPage() {
   
   const { data: galleries } = await supabase
     .from('event_galleries')
-    .select('*, events(title, date)')
+    .select('*, events(title, date), event_gallery_images(image_url, is_cover)')
     .order('created_at', { ascending: false });
 
   const { data: events } = await supabase
