@@ -27,6 +27,21 @@ export default async function StudentDashboard({
     .eq('id', session.user.id)
     .single();
 
+  // Check if this user is a BOD member by matching their exact name
+  let bodRole = null;
+  if (profile?.full_name) {
+    const { data: bodMatch } = await supabase
+      .from('bod_members')
+      .select('post')
+      .ilike('full_name', profile.full_name)
+      .eq('is_active', true)
+      .maybeSingle();
+    
+    if (bodMatch) {
+      bodRole = bodMatch.post;
+    }
+  }
+
   // Fetch data for tabs
   let events = [];
   let clubs = [];
@@ -74,22 +89,34 @@ export default async function StudentDashboard({
       <div className="lg:col-span-1 space-y-6">
         
         {/* ECSA Passport Card */}
-        <div className="glass p-6 rounded-3xl border border-white/10 flex flex-col items-center text-center relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-br from-electric-blue/20 to-transparent"></div>
+        <div className={`glass p-6 rounded-3xl border flex flex-col items-center text-center relative overflow-hidden ${
+          bodRole ? 'border-yellow-500/50 shadow-[0_0_30px_rgba(234,179,8,0.15)]' : 'border-white/10'
+        }`}>
+          <div className={`absolute top-0 left-0 w-full h-24 bg-gradient-to-br ${
+            bodRole ? 'from-yellow-500/30' : 'from-electric-blue/20'
+          } to-transparent`}></div>
           
-          <div className="w-24 h-24 rounded-full border-4 border-black bg-electric-blue/10 flex items-center justify-center mb-4 z-10 relative overflow-hidden">
+          <div className={`w-24 h-24 rounded-full border-4 border-black flex items-center justify-center mb-4 z-10 relative overflow-hidden ${
+            bodRole ? 'bg-yellow-500/20' : 'bg-electric-blue/10'
+          }`}>
             {profile?.avatar_url ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img src={profile.avatar_url} alt="Profile" className="w-full h-full object-cover" />
             ) : (
-              <span className="text-2xl font-bold text-electric-cyan">
+              <span className={`text-2xl font-bold ${bodRole ? 'text-yellow-400' : 'text-electric-cyan'}`}>
                 {profile?.full_name?.charAt(0) || 'S'}
               </span>
             )}
           </div>
           
-          <h2 className="text-xl font-heading font-bold text-white mb-1 z-10">{profile?.full_name || 'Student'}</h2>
-          <p className="text-xs text-electric-cyan uppercase tracking-widest font-bold mb-6 z-10">{profile?.department || 'General Member'}</p>
+          <h2 className="text-xl font-heading font-bold text-white mb-1 z-10">
+            {profile?.full_name || 'Student'}
+          </h2>
+          <p className={`text-xs uppercase tracking-widest font-bold mb-6 z-10 ${
+            bodRole ? 'text-yellow-400' : 'text-electric-cyan'
+          }`}>
+            {bodRole ? `${bodRole} - ECSA Board` : (profile?.department || 'General Member')}
+          </p>
           
           <div className="w-full bg-white/5 rounded-xl p-4 flex flex-col items-center justify-center border border-white/10 z-10 mb-4">
             <QrCode size={64} className="text-white/80 mb-2" />
