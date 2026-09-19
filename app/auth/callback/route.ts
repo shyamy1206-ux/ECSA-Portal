@@ -17,6 +17,10 @@ export async function GET(request: Request) {
     const supabase = createClient()
     const { data: { session }, error } = await supabase.auth.exchangeCodeForSession(code)
     
+    if (error) {
+      console.error("OAuth Exchange Error:", error.message);
+    }
+    
     if (session && !next) {
       // Check user role for default routing if 'next' is not specified
       const { data: roleData } = await supabase
