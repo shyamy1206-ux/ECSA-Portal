@@ -19,11 +19,26 @@ export default function Navbar() {
   }, []);
 
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // Don't show public navbar in app or admin routes
-  if (pathname.startsWith('/app') || pathname.startsWith('/admin')) {
-    return null;
-  }
+  useEffect(() => {
+    import('@/lib/supabase/client').then(({ createClient }) => {
+      const supabase = createClient();
+      supabase.auth.getSession().then(({ data: { session } }) => {
+        setIsLoggedIn(!!session);
+      });
+      
+      const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+        setIsLoggedIn(!!session);
+      });
+      
+      return () => {
+        authListener.subscription.unsubscribe();
+      };
+    });
+  }, []);
+
+  // Navbar now shows everywhere, no longer hiding on /app or /admin
 
   const links = [
     { name: "Home", href: "/" },
@@ -59,8 +74,8 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-4">
           <GlobalSearch />
           <MagneticButton>
-            <Link href="/login" className="px-5 py-2 text-sm font-medium border border-white/20 rounded-full hover:bg-white/10 transition-colors">
-              Login
+            <Link href={isLoggedIn ? "/app" : "/login"} className="px-5 py-2 text-sm font-medium border border-white/20 rounded-full hover:bg-white/10 transition-colors">
+              {isLoggedIn ? "Dashboard" : "Login"}
             </Link>
           </MagneticButton>
         </div>
@@ -97,11 +112,11 @@ export default function Navbar() {
             </Link>
           ))}
           <Link 
-            href="/login" 
+            href={isLoggedIn ? "/app" : "/login"} 
             onClick={() => setIsOpen(false)}
             className="mt-4 px-8 py-3 text-sm font-medium border border-electric-cyan text-electric-cyan rounded-full hover:bg-electric-cyan hover:text-navy-900 transition-colors"
           >
-            Login
+            {isLoggedIn ? "Dashboard" : "Login"}
           </Link>
         </div>
       )}
