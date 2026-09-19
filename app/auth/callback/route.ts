@@ -4,13 +4,14 @@ import { createClient } from '@/lib/supabase/server'
 export async function GET(request: Request) {
   const requestUrl = new URL(request.url)
   const code = requestUrl.searchParams.get('code')
-  // We passed the 'next' parameter state during OAuth initialization
-  // Sometimes OAuth providers return state param containing the next URL.
-  // For Supabase, the best way to handle 'next' is via the query parameter if we pass it, or decoding state.
-  // Actually, Supabase passes 'next' back directly in the query if we set it in options.redirectTo
   const next = requestUrl.searchParams.get('next')
 
-  let redirectUrl = next ? `${requestUrl.origin}${next}` : `${requestUrl.origin}/app`;
+  // Prevent redirecting to internal Vercel deployment URLs (which trigger Vercel Auth)
+  // Use x-forwarded-host if available (the domain the user actually typed in)
+  const forwardedHost = request.headers.get('x-forwarded-host');
+  const origin = forwardedHost ? `https://${forwardedHost}` : requestUrl.origin;
+
+  let redirectUrl = next ? `${origin}${next}` : `${origin}/app`;
 
   if (code) {
     const supabase = createClient()
@@ -27,11 +28,10 @@ export async function GET(request: Request) {
       const role = roleData?.role;
       
       if (role === 'super_admin' || role === 'ecsa_admin') {
-        redirectUrl = `${requestUrl.origin}/admin`;
+        redirectUrl = `${origin}/admin`;
       }
     }
   }
 
-  // Fallback if no code and no next (though should not happen)
   return NextResponse.redirect(redirectUrl)
 }
