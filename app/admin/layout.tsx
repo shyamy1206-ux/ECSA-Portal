@@ -47,7 +47,16 @@ export default async function AdminLayout({
     redirect('/app');
   }
 
+  // Check if BOD member
+  const { data: bodData } = await supabase
+    .from('bod_members')
+    .select('full_name, post')
+    .eq('user_id', user.id)
+    .eq('is_active', true)
+    .maybeSingle();
+
   const roleDisplay = roleData.role;
+  const displayName = bodData?.full_name || user.email?.split('@')[0];
 
   return (
     <div className="min-h-screen flex bg-navy-900/80 pt-20">
@@ -87,11 +96,13 @@ export default async function AdminLayout({
         <div className="p-4 border-t border-white/10 bg-black/20">
           <div className="flex items-center gap-3 text-sm text-gray-300">
             <div className="w-10 h-10 rounded-full bg-electric-cyan/20 flex items-center justify-center text-electric-cyan border border-electric-cyan/30">
-              {user.email?.charAt(0).toUpperCase()}
+              {displayName?.charAt(0).toUpperCase()}
             </div>
             <div className="flex-1 truncate">
-              <p className="font-medium text-white truncate">{user.email?.split('@')[0]}</p>
-              <p className="text-xs text-electric-blue uppercase tracking-wider">{roleDisplay.replace('_', ' ')}</p>
+              <p className="font-medium text-white truncate">{displayName}</p>
+              <p className="text-[10px] text-electric-blue uppercase tracking-widest font-bold">
+                {bodData?.post || roleDisplay.replace('_', ' ')}
+              </p>
             </div>
             <LogoutButton />
           </div>
