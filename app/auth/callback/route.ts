@@ -22,6 +22,14 @@ export async function GET(request: Request) {
     }
     
     if (session && !next) {
+      // Auto-create or update public.profiles to satisfy Foreign Key constraints
+      await supabase.from('profiles').upsert({
+        id: session.user.id,
+        full_name: session.user.user_metadata?.full_name || session.user.email?.split('@')[0] || 'Unknown User',
+        avatar_url: session.user.user_metadata?.avatar_url || null,
+        updated_at: new Date().toISOString()
+      }, { onConflict: 'id' });
+
       // Check user role for default routing if 'next' is not specified
       const { data: roleData } = await supabase
         .from('user_roles')

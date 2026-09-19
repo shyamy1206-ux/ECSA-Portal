@@ -2,7 +2,11 @@ import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
-export default async function ClubProposalPage() {
+export default async function ClubProposalPage({
+  searchParams
+}: {
+  searchParams: { error?: string, message?: string }
+}) {
   const supabase = createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
@@ -24,6 +28,13 @@ export default async function ClubProposalPage() {
     
     // Generate a basic slug
     const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+
+    // Ensure the user has a profile record to satisfy Foreign Key constraints
+    await supabaseServer.from('profiles').upsert({
+      id: user.id,
+      full_name: user.user_metadata?.full_name || user.email?.split('@')[0] || 'Unknown User',
+      updated_at: new Date().toISOString()
+    }, { onConflict: 'id' });
 
     const { error } = await supabaseServer
       .from('clubs')
@@ -50,6 +61,18 @@ export default async function ClubProposalPage() {
       <div className="glass p-8 rounded-2xl border border-white/10">
         <h1 className="text-3xl font-heading font-bold mb-2">Submit a Club Proposal</h1>
         <p className="text-gray-400 mb-8">Got an idea for a new club? Submit the details below for the ECSA Board to review.</p>
+
+        {searchParams.error && (
+          <div className="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm font-medium">
+            Error: {searchParams.error}
+          </div>
+        )}
+
+        {searchParams.message && (
+          <div className="mb-6 p-4 rounded-xl bg-green-500/10 border border-green-500/20 text-green-400 text-sm font-medium">
+            {searchParams.message}
+          </div>
+        )}
 
         <form action={submitProposal} className="space-y-6">
           <div>
